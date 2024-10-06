@@ -7,6 +7,8 @@ import CacheManager from "./CacheManager";
 import {GetRandomProjects} from "./routes/projects/GetRandomProjects";
 import {Range, Range0to100} from "./types/Range";
 import {CheckProjectValidity} from "./routes/projects/CheckProjectValidity";
+import ModrinthStatistics from "./interfaces/miscellaneous/ModrinthStatistics";
+import StatisticsRoute from "./routes/miscellaneous/StatisticsRoute";
 
 /**
  * The main class for the Modrinth API
@@ -97,6 +99,18 @@ export default class Modrinth {
             this.options.userAgent,
             this.cacheManager,
             projectId
+        ).getData();
+    }
+
+    /**
+     * Get the statistics for Modrinth
+     * @returns The statistics for Modrinth
+     */
+    getStatistics(): Promise<ModrinthStatistics> {
+        return new StatisticsRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
         ).getData();
     }
 }
