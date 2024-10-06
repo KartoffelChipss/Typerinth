@@ -1,4 +1,4 @@
-# Modrinth-TS
+# Typerinth
 
 [![npm](https://img.shields.io/npm/v/modrinth-ts?label=Downloads)](https://www.npmjs.com/package/modrinth-ts) [![npm](https://img.shields.io/npm/dt/modrinth-ts?label=Version)](https://www.npmjs.com/package/modrinth-ts) [![discord](https://dcbadge.vercel.app/api/server/Cc76tYwXvy?style=flat&theme=default-inverted)](https://strassburger.org/discord)
 
@@ -33,7 +33,7 @@ This library is a wrapper around the [Modrinth API](https://docs.modrinth.com/),
 Simply execute the following command in your commandline:
 
 ```bash
-npm install modrinth-ts
+npm install typerinth
 ```
 
 ## Usage
@@ -41,16 +41,16 @@ npm install modrinth-ts
 Import the package like this:
 
 ```ts
-import { Modrinth } from 'modrinth-ts';
+import { Modrinth } from 'typerinth';
 const modrinth = new Modrinth();
 ```
 
 ### Options
 
-You can change the options to tune modrinth-ts to your liking:
+You can change the options to tune typerinth to your liking:
 
 ```ts
-import { Modrinth } from 'modrinth-ts';
+import { Modrinth } from 'typerinth';
 const modrinth = new Modrinth({
         baseUrl: "https://api.modrinth.com",
         apiVersion: "v2",
@@ -155,7 +155,7 @@ const projects = await modrinth.getUserProjects("user-id");
 Gets tags as described in the [Modrinth API documentation](https://docs.modrinth.com/#tag/tags/operation/categoryList).
 
 ```ts
-import {TagType} from "modrinth-ts";
+import {TagType} from "typerinth";
 const tags = await modrinth.getTag(TagType.Loader);
 ```
 

@@ -1,7 +1,7 @@
 {
-    "name": "modrinth-ts",
+    "name": "typerinth",
     "version": "0.0.1",
-    "description": "A TypeScript API wrapper for the Modrinth API",
+    "description": "A TypeScript library for interacting with the Modrinth API.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
@@ -21,10 +21,15 @@
         "modrinth-api",
         "modrinth-ts",
         "modrinth-api-ts",
+        "modrinth.ts",
+        "modrinth.js",
         "typescript",
         "api",
+        "library",
+        "wrapper",
         "minecraft",
-        "minecraft-mods"
+        "minecraft-mods",
+        "minecraft-launcher"
     ],
     "license": "MIT",
     "readme": "README.md",
