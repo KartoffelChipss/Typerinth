@@ -1,7 +1,7 @@
 import {Route} from "../Route";
 import {Project} from "../../interfaces/project";
 import {URL} from "node:url";
-import CacheManager from "../../CacheManager";
+import CacheManager from "../../util/CacheManager";
 
 export class GetProjectRoute extends Route<Project> {
     private projectId: string;

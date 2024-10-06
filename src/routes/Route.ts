@@ -1,5 +1,5 @@
 import {URL} from "url";
-import CacheManager from "../CacheManager";
+import CacheManager from "../util/CacheManager";
 
 export abstract class Route<T> {
     /**

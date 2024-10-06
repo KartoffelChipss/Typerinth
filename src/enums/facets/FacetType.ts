@@ -1,0 +1,17 @@
+export enum FacetType {
+    ProjectType = "project_type",
+    Categories = "categories",
+    Versions = "versions",
+    ClientSide = "client_side",
+    ServerSide = "server_side",
+    OpenSource = "open_source",
+    Title = "title",
+    Author = "author",
+    Follows = "follows",
+    ProjectId = "project_id",
+    License = "license",
+    Downloads = "downloads",
+    Color = "color",
+    CreatedTimestamp = "created_timestamp",
+    ModifiedTimestamp = "modified_timestamp",
+}

@@ -1,7 +1,7 @@
 import {Route} from "../Route";
 import {Project} from "../../interfaces/project";
 import {URL} from "node:url";
-import CacheManager from "../../CacheManager";
+import CacheManager from "../../util/CacheManager";
 import {Range0to100} from "../../types/Range";
 
 export class GetRandomProjects extends Route<Project[]> {

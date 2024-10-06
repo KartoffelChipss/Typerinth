@@ -1,7 +1,7 @@
 import {URL} from "url";
 import ModrinthStatistics from "../../interfaces/miscellaneous/ModrinthStatistics";
 import {Route} from "../Route";
-import CacheManager from "../../CacheManager";
+import CacheManager from "../../util/CacheManager";
 
 export default class StatisticsRoute extends Route<ModrinthStatistics> {
     constructor(baseUrl: URL, ua: string|undefined, cacheManager: CacheManager) {

@@ -1,6 +1,6 @@
 import {URL} from "url";
 import {Route} from "../Route";
-import CacheManager from "../../CacheManager";
+import CacheManager from "../../util/CacheManager";
 
 export class CheckProjectValidity extends Route<boolean> {
     private projectId: string;

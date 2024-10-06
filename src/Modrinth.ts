@@ -1,14 +1,17 @@
 import MROptions, {getDefaultOptions} from "./interfaces/MROptions";
 import {URL} from "url";
 import {GetProjectRoute} from "./routes/projects/GetProjectRoute";
-import {Project} from "./interfaces/project";
+import {Project, SearchResult} from "./interfaces/project";
 import {GetMultipleProjectsRoute} from "./routes/projects/GetMultipleProjectsRoute";
-import CacheManager from "./CacheManager";
+import CacheManager from "./util/CacheManager";
 import {GetRandomProjects} from "./routes/projects/GetRandomProjects";
 import {Range, Range0to100} from "./types/Range";
 import {CheckProjectValidity} from "./routes/projects/CheckProjectValidity";
 import ModrinthStatistics from "./interfaces/miscellaneous/ModrinthStatistics";
 import StatisticsRoute from "./routes/miscellaneous/StatisticsRoute";
+import SearchProjectRoute from "./routes/projects/SearchProjectRoute";
+import {SearchIndex} from "./enums/SearchIndex";
+import SearchOptions from "./interfaces/project/search/SearchOptions";
 
 /**
  * The main class for the Modrinth API
@@ -47,6 +50,21 @@ export default class Modrinth {
      */
     getApiUrl(): URL {
         return new URL(`${this.options.baseUrl}/${this.options.apiVersion}`);
+    }
+
+    /**
+     * Search for projects
+     * @param query The query to search for
+     * @param options Options for the search
+     */
+    search(query: string, options?: SearchOptions): Promise<SearchResult> {
+        return new SearchProjectRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            query,
+            options
+        ).getData();
     }
 
     /**

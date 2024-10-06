@@ -1,5 +1,5 @@
 import NodeCache from "node-cache";
-import CacheOptions from "./interfaces/CacheOptions";
+import CacheOptions from "../interfaces/CacheOptions";
 
 export default class CacheManager {
     private cache: NodeCache;
