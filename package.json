@@ -1,6 +1,6 @@
 {
     "name": "typerinth",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "A TypeScript library for interacting with the Modrinth API.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
