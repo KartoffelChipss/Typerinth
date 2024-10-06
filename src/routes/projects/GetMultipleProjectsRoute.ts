@@ -11,7 +11,7 @@ export class GetMultipleProjectsRoute extends Route<Project[]> {
         this.projectIds = projectIds;
     }
 
-    getCacheKey(): string {
+    getCacheKey(): string|null {
         return `projects-${this.projectIds.join(",")}`;
     }
 
@@ -26,8 +26,7 @@ export class GetMultipleProjectsRoute extends Route<Project[]> {
 
         if (data.error) {
             if (data.error === "not_found") throw new Error("Project not found");
-
-            throw new Error(`Unexpected error: ${data.error}`);
+            throw new Error(`Unexpected error: ${data.error} (${data.description})`);
         }
 
         return data as Project[];

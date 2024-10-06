@@ -39,7 +39,7 @@ export abstract class Route<T> {
     /**
      * Get the cache key for the route
      */
-    abstract getCacheKey(): string;
+    abstract getCacheKey(): string|null;
 
     /**
      * Fetch the raw data from the url
@@ -70,8 +70,8 @@ export abstract class Route<T> {
      * @returns The data from the API
      */
     async getData(): Promise<T> {
-        if (this.cacheManager.isEnabled()) {
-            const cachedData = this.cacheManager.get(this.getCacheKey());
+        if (this.cacheManager.isEnabled() && this.getCacheKey() != null) {
+            const cachedData = this.cacheManager.get(this.getCacheKey()!!);
             if (cachedData) {
                 console.log("Cache hit for", this.getCacheKey());
                 return cachedData;
@@ -80,7 +80,7 @@ export abstract class Route<T> {
 
         const data = this.parseData(await this.fetchRaw());
 
-        if (this.cacheManager.isEnabled()) this.cacheManager.set(this.getCacheKey(), data);
+        if (this.cacheManager.isEnabled() && this.getCacheKey() != null) this.cacheManager.set(this.getCacheKey()!!, data);
 
         return data;
     }

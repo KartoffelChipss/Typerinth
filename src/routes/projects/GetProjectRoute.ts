@@ -11,7 +11,7 @@ export class GetProjectRoute extends Route<Project> {
         this.projectId = projectId;
     }
 
-    getCacheKey(): string {
+    getCacheKey(): string|null {
         return `project-${this.projectId}`;
     }
 
@@ -24,8 +24,7 @@ export class GetProjectRoute extends Route<Project> {
 
         if (data.error) {
             if (data.error === "not_found") throw new Error("Project not found");
-
-            throw new Error(`Unexpected error: ${data.error}`);
+            throw new Error(`Unexpected error: ${data.error} (${data.description})`);
         }
 
         return data as Project;
