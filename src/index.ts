@@ -9,6 +9,7 @@ import {FacetType} from "./enums/facets/FacetType";
 import {FacetOperation} from "./enums/facets/FacetOperation";
 import {TagType} from "./enums/TagType";
 import {Category, DonationPlatform, Loader, GameVersion, FullLicense} from "./interfaces/tags";
+import {ProjectVersion, Dependency, VersionFile, ProjectVersionSearchOptions, ProjectVersionFromHashOptions} from "./interfaces/version";
 
 export {
     Modrinth,
@@ -29,4 +30,9 @@ export {
     Loader,
     GameVersion,
     FullLicense,
+    ProjectVersion,
+    Dependency,
+    VersionFile,
+    ProjectVersionSearchOptions,
+    ProjectVersionFromHashOptions,
 }

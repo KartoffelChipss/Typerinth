@@ -20,6 +20,11 @@ import {TagTypeMapping} from "./types/TagTypeMapping";
 import GetTagRoute from "./routes/miscellaneous/GetTagRoute";
 import {FullLicense} from "./interfaces/tags";
 import GetLicenseRoute from "./routes/miscellaneous/GetLicenseRoute";
+import {ProjectVersion, ProjectVersionFromHashOptions, ProjectVersionSearchOptions} from "./interfaces/version";
+import GetProjectVersionsRoute from "./routes/versions/GetProjectVersionsRoute";
+import GetVersionRoute from "./routes/versions/GetVersionRoute";
+import GetMultipleVersionsRoute from "./routes/versions/GetMultipleVersionsRoute";
+import GetVersionFromFileHashRoute from "./routes/versions/GetVersionFromFileHashRoute";
 
 /**
  * The main class for the Modrinth API
@@ -132,6 +137,57 @@ export default class Modrinth {
             this.options.userAgent,
             this.cacheManager,
             projectId
+        ).getData();
+    }
+
+    /**
+     * Get the versions of a project
+     * @param projectId The ID or slug of the project to get the versions of
+     * @param options Options for the search
+     */
+    getProjectVersions(projectId: string, options: ProjectVersionSearchOptions = {}): Promise<ProjectVersion[]> {
+        return new GetProjectVersionsRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            projectId,
+            options
+        ).getData();
+    }
+
+    /**
+     * Get a version of a project
+     * @param versionId The ID of the version to get
+     */
+    getVersion(versionId: string): Promise<ProjectVersion> {
+        return new GetVersionRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            versionId
+        ).getData();
+    }
+
+    /**
+     * Get multiple versions by their IDs
+     * @param versionIds The IDs of the versions to get
+     */
+    getVersions(versionIds: string[]): Promise<ProjectVersion[]> {
+        return new GetMultipleVersionsRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            versionIds
+        ).getData();
+    }
+
+    getVersionFromFileHash(fileHash: string, options: ProjectVersionFromHashOptions = {}): Promise<ProjectVersion> {
+        return new GetVersionFromFileHashRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            fileHash,
+            options
         ).getData();
     }
 
