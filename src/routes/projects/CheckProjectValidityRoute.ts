@@ -2,7 +2,7 @@ import {URL} from "url";
 import {Route} from "../Route";
 import CacheManager from "../../util/CacheManager";
 
-export class CheckProjectValidity extends Route<boolean> {
+export class CheckProjectValidityRoute extends Route<boolean> {
     private projectId: string;
 
     constructor(baseUrl: URL, ua: string|undefined, cacheManager: CacheManager, projectId: string) {

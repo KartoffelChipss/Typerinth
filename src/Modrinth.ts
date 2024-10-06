@@ -6,15 +6,25 @@ import {GetMultipleProjectsRoute} from "./routes/projects/GetMultipleProjectsRou
 import CacheManager from "./util/CacheManager";
 import {GetRandomProjects} from "./routes/projects/GetRandomProjects";
 import {Range, Range0to100} from "./types/Range";
-import {CheckProjectValidity} from "./routes/projects/CheckProjectValidity";
+import {CheckProjectValidityRoute} from "./routes/projects/CheckProjectValidityRoute";
 import ModrinthStatistics from "./interfaces/miscellaneous/ModrinthStatistics";
 import StatisticsRoute from "./routes/miscellaneous/StatisticsRoute";
 import SearchProjectRoute from "./routes/projects/SearchProjectRoute";
-import {SearchIndex} from "./enums/SearchIndex";
 import SearchOptions from "./interfaces/project/search/SearchOptions";
+import {User} from "./interfaces/users";
+import GetUserRoute from "./routes/users/GetUserRoute";
+import GetMultipleUsersRoute from "./routes/users/GetMultipleUsersRoute";
+import GetUserProjectsRoute from "./routes/users/GetUserProjectsRoute";
 
 /**
  * The main class for the Modrinth API
+ *
+ * @example
+ * import {Modrinth} from "modrinth-ts";
+ *
+ * const modrinth = new Modrinth();
+ *
+ * modrinth.search("fabric").then(console.log);
  */
 export default class Modrinth {
     private options: MROptions;
@@ -112,11 +122,50 @@ export default class Modrinth {
      * @param projectId The ID or slug of the project to check
      */
     checkProjectValidity(projectId: string): Promise<boolean> {
-        return new CheckProjectValidity(
+        return new CheckProjectValidityRoute(
             this.getApiUrl(),
             this.options.userAgent,
             this.cacheManager,
             projectId
+        ).getData();
+    }
+
+    /**
+     * Get a user by their ID or username
+     * @param userId The ID or username of the user to get
+     */
+    getUser(userId: string): Promise<User> {
+        return new GetUserRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            userId
+        ).getData();
+    }
+
+    /**
+     * Get multiple users by their IDs or usernames
+     * @param userIds The IDs or usernames of the users to get
+     */
+    getUsers(userIds: string[]): Promise<User[]> {
+        return new GetMultipleUsersRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            userIds
+        ).getData();
+    }
+
+    /**
+     * Get a user's projects by their ID or username
+     * @param userId The ID or username of the user
+     */
+    getUserProjects(userId: string): Promise<Project[]> {
+        return new GetUserProjectsRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            userId
         ).getData();
     }
 
