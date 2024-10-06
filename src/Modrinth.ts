@@ -6,6 +6,7 @@ import {GetMultipleProjectsRoute} from "./routes/projects/GetMultipleProjectsRou
 import CacheManager from "./CacheManager";
 import {GetRandomProjects} from "./routes/projects/GetRandomProjects";
 import {Range, Range0to100} from "./types/Range";
+import {CheckProjectValidity} from "./routes/projects/CheckProjectValidity";
 
 /**
  * The main class for the Modrinth API
@@ -62,7 +63,7 @@ export default class Modrinth {
 
     /**
      * Get multiple projects by their IDs
-     * @param projectIds The IDs of the projects to get
+     * @param projectIds The IDs or slugs of the projects to get
      */
     getProjects(projectIds: string[]): Promise<Project[]> {
         return new GetMultipleProjectsRoute(
@@ -83,6 +84,19 @@ export default class Modrinth {
             this.options.userAgent,
             this.cacheManager,
             count
+        ).getData();
+    }
+
+    /**
+     * Check if a project is valid
+     * @param projectId The ID or slug of the project to check
+     */
+    checkProjectValidity(projectId: string): Promise<boolean> {
+        return new CheckProjectValidity(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            projectId
         ).getData();
     }
 }
