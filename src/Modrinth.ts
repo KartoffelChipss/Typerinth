@@ -15,6 +15,11 @@ import {User} from "./interfaces/users";
 import GetUserRoute from "./routes/users/GetUserRoute";
 import GetMultipleUsersRoute from "./routes/users/GetMultipleUsersRoute";
 import GetUserProjectsRoute from "./routes/users/GetUserProjectsRoute";
+import {TagType} from "./enums/TagType";
+import {TagTypeMapping} from "./types/TagTypeMapping";
+import GetTagRoute from "./routes/miscellaneous/GetTagRoute";
+import {FullLicense} from "./interfaces/tags";
+import GetLicenseRoute from "./routes/miscellaneous/GetLicenseRoute";
 
 /**
  * The main class for the Modrinth API
@@ -166,6 +171,32 @@ export default class Modrinth {
             this.options.userAgent,
             this.cacheManager,
             userId
+        ).getData();
+    }
+
+    /**
+     * Get a tag by its type
+     * @param tagType The type of the tag to get
+     */
+    getTag<T extends TagType>(tagType: T): Promise<TagTypeMapping[T]> {
+        return new GetTagRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            tagType
+        ).getData();
+    }
+
+    /**
+     * Get a license by its ID
+     * @param licenseId The ID of the license to get
+     */
+    getLicense(licenseId: string): Promise<FullLicense> {
+        return new GetLicenseRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            licenseId
         ).getData();
     }
 
