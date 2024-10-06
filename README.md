@@ -1,6 +1,6 @@
 # Typerinth
 
-[![npm](https://img.shields.io/npm/v/modrinth-ts?label=Downloads)](https://www.npmjs.com/package/modrinth-ts) [![npm](https://img.shields.io/npm/dt/modrinth-ts?label=Version)](https://www.npmjs.com/package/modrinth-ts) [![discord](https://dcbadge.vercel.app/api/server/Cc76tYwXvy?style=flat&theme=default-inverted)](https://strassburger.org/discord)
+[![npm](https://img.shields.io/npm/v/typerinth?label=Downloads&color=%23366fb4)](https://www.npmjs.com/package/typerinth) [![npm](https://img.shields.io/npm/dt/typerinth?label=Version)](https://www.npmjs.com/package/typerinth) [![discord](https://dcbadge.vercel.app/api/server/Cc76tYwXvy?style=flat&theme=default-inverted)](https://strassburger.org/discord)
 
 This library is a wrapper around the [Modrinth API](https://docs.modrinth.com/), a platform for Minecraft mods, modpacks, and other content. It is not an official package by Modrinth and not affiliated with Modrinth in any way.
 
