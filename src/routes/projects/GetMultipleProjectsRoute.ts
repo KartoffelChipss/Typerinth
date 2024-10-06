@@ -12,7 +12,7 @@ export class GetMultipleProjectsRoute extends Route<Project[]> {
     }
 
     getCacheKey(): string|null {
-        return `projects-${this.projectIds.join(",")}`;
+        return `projects:${this.projectIds.join(",")}`;
     }
 
     getUrl(): URL {

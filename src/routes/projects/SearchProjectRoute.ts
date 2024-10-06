@@ -30,7 +30,7 @@ export default class SearchProjectRoute extends Route<SearchResult> {
     }
 
     getCacheKey(): string|null {
-        return ``;
+        return `search:${this.query}:${this.facets.stringify()}:${this.index}:${this.offset}:${this.limit}`;
     }
 
     getUrl(): URL {

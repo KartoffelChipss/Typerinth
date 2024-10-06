@@ -11,7 +11,7 @@ export class CheckProjectValidity extends Route<boolean> {
     }
 
     getCacheKey(): string|null {
-        return `project-validity-${this.projectId}`;
+        return `project_validity:${this.projectId}`;
     }
 
     getUrl(): URL {

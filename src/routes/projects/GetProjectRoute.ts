@@ -12,7 +12,7 @@ export class GetProjectRoute extends Route<Project> {
     }
 
     getCacheKey(): string|null {
-        return `project-${this.projectId}`;
+        return `project:${this.projectId}`;
     }
 
     getUrl(): URL {
