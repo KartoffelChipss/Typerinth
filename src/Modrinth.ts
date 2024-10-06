@@ -88,7 +88,7 @@ export default class Modrinth {
     }
 
     /**
-     * Get the user agent for the Modrinth API
+     * Get a project by its ID or slug
      * @param projectId The ID or slug of the project to get
      * @returns The project with the given ID or slug
      */
@@ -102,7 +102,7 @@ export default class Modrinth {
     }
 
     /**
-     * Get multiple projects by their IDs
+     * Get multiple projects by their IDs or slugs
      * @param projectIds The IDs or slugs of the projects to get
      */
     getProjects(projectIds: string[]): Promise<Project[]> {

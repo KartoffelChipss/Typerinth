@@ -1,12 +1,13 @@
 {
     "name": "modrinth-ts",
     "version": "0.0.1",
-    "description": "",
-    "main": "dist/main.js",
-    "types": "dist/main.d.ts",
+    "description": "A TypeScript API wrapper for the Modrinth API",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "scripts": {
         "build": "tsc",
         "test": "tsc && jest",
+        "publish": "tsc && npm publish",
         "testapp": "tsc && bun ./testapp/index.ts",
         "testapp2": "tsc && node ./jstestapp/index.js"
     },
