@@ -15,7 +15,16 @@
         "email": "contact@strassburger.org",
         "url": "https://strassburger.org/"
     },
-    "keywords": [],
+    "keywords": [
+        "modrinth",
+        "modrinth-api",
+        "modrinth-ts",
+        "modrinth-api-ts",
+        "typescript",
+        "api",
+        "minecraft",
+        "minecraft-mods"
+    ],
     "license": "MIT",
     "readme": "README.md",
     "devDependencies": {
