@@ -88,7 +88,7 @@ You can use Facets to filter search results more precisely.
    - **FacetOperation**: The comparison method (like EQUALS).
    - **Value**: The actual value to filter by.
 2. **FacetGroup**: Combines multiple Facets with a logical **OR**. If any of the Facets in the group match, the result is included. A FacetGroup can also just have one Facet.
-3. **SearchFacets**: Combines multiple FacetGroups with a logical **AND**. This means that all groups must match at least one Facet for a result to be included.
+3. **SearchFacets**: Combines multiple FacetGroups with a logical **AND**.
 
 Here’s an example where we search for projects related to "life", filtering them to show only results that:
 - Belong to the "forge" category **AND**
