@@ -10,6 +10,7 @@ This library is a wrapper around the [Modrinth API](https://docs.modrinth.com/),
 - [Usage](#usage)
   - [Options](#options)
   - [Projects](#projects)
+    - [Search](#search)
     - [Get a project by its ID or slug](#get-a-project-by-its-id-or-slug)
     - [Get multiple projects by their IDs or slugs](#get-multiple-projects-by-their-ids-or-slugs)
     - [Get a random selection of projects](#get-a-random-selection-of-projects)
