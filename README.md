@@ -1,6 +1,6 @@
 # Typerinth
 
-[![npm](https://img.shields.io/npm/v/typerinth?label=Downloads&color=%23366fb4)](https://www.npmjs.com/package/typerinth) [![npm](https://img.shields.io/npm/dt/typerinth?label=Version)](https://www.npmjs.com/package/typerinth) [![discord](https://dcbadge.vercel.app/api/server/Cc76tYwXvy?style=flat&theme=default-inverted)](https://strassburger.org/discord)
+[![npm](https://img.shields.io/npm/v/typerinth?label=Version&color=%23366fb4)](https://www.npmjs.com/package/typerinth) [![npm](https://img.shields.io/npm/dt/typerinth?label=Downloads)](https://www.npmjs.com/package/typerinth) [![discord](https://dcbadge.vercel.app/api/server/Cc76tYwXvy?style=flat&theme=default-inverted)](https://strassburger.org/discord)
 
 This library is a wrapper around the [Modrinth API](https://docs.modrinth.com/), a platform for Minecraft mods, modpacks, and other content. It is not an official package by Modrinth and not affiliated with Modrinth in any way.
 
@@ -68,6 +68,46 @@ Once you have done this, you can use all the following functions as you like.
 ---
 
 ### Projects
+
+#### Search
+
+```ts
+import { SearchIndex } from 'typerinth';
+const result = await modrinth.search("life", {
+    limit: 3,
+    index: SearchIndex.Downloads,
+})
+```
+
+You can use Facets to filter search results more precisely.
+
+1. **Facet**: Represents a single filter condition. It consists of:
+   - **FacetType**: The category of the filter (e.g., versions, categories, etc.).
+   - **FacetOperation**: The comparison method (like EQUALS).
+   - **Value**: The actual value to filter by.
+2. **FacetGroup**: Combines multiple Facets with a logical **OR**. If any of the Facets in the group match, the result is included. A FacetGroup can also just have one Facet.
+3. **SearchFacets**: Combines multiple FacetGroups with a logical **AND**. This means that all groups must match at least one Facet for a result to be included.
+
+Here’s an example where we search for projects related to "life", filtering them to show only results that:
+- Belong to the "forge" category **AND**
+- Are compatible with Minecraft version "1.16.5" **OR** "1.20.1".
+
+```ts
+import { SearchIndex, SearchFacets, FacetGroup, Facet } from 'typerinth';
+const result = await modrinth.search("life", {
+    limit: 3,
+    index: SearchIndex.Downloads,
+    facets: new SearchFacets(
+            new FacetGroup(
+                new Facet(FacetType.Categories, FacetOperation.EQUALS, "forge")
+            ),
+            new FacetGroup(
+                new Facet(FacetType.Versions, FacetOperation.EQUALS, "1.16.5"),
+                new Facet(FacetType.Versions, FacetOperation.EQUALS, "1.17.1")
+            ),
+    )
+})
+```
 
 #### Get a project by its ID or slug
 
