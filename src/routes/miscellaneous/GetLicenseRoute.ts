@@ -20,7 +20,6 @@ export default class GetLicenseRoute extends Route<FullLicense> {
     }
 
     parseData(data: any): FullLicense {
-        console.log(data);
         if (!data) throw new Error("Unexpected empty response");
 
         if (data.error) {

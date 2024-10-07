@@ -40,7 +40,6 @@ export default class SearchProjectRoute extends Route<SearchResult> {
         url.searchParams.append("index", this.index);
         url.searchParams.append("offset", this.offset.toString());
         url.searchParams.append("limit", this.limit.toString());
-        console.log(url.href)
         return url;
     }
 
