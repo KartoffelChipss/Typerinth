@@ -28,6 +28,7 @@ This library is a wrapper around the [Modrinth API](https://docs.modrinth.com/),
     - [Get tags by its type](#get-tags-by-its-type)
     - [Get a License by its ID](#get-a-license-by-its-id)
     - [Get statistics](#get-statistics)
+- [License](#license)
 
 ## Installation
 
@@ -214,4 +215,4 @@ const stats = await modrinth.getStatistics();
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/KartoffelChipss/Typerinth/blob/main/LICENSE) file for details.
