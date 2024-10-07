@@ -73,7 +73,6 @@ export abstract class Route<T> {
         if (this.cacheManager.isEnabled() && this.getCacheKey() != null) {
             const cachedData = this.cacheManager.get(this.getCacheKey()!!);
             if (cachedData) {
-                console.log("Cache hit for", this.getCacheKey());
                 return cachedData;
             }
         }
