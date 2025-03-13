@@ -23,7 +23,7 @@ export default class GetProjectVersionsRoute extends Route<ProjectVersion[]> {
     }
 
     getCacheKey(): string | null {
-        return `project_versions:${this.projectId}`;
+        return `project_versions:${this.projectId}:${JSON.stringify(this.options)}`;
     }
 
     getUrl(): URL {
