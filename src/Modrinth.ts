@@ -17,9 +17,9 @@ import GetMultipleUsersRoute from './routes/users/GetMultipleUsersRoute';
 import GetUserProjectsRoute from './routes/users/GetUserProjectsRoute';
 import { TagType } from './enums/TagType';
 import { TagTypeMapping } from './types/TagTypeMapping';
-import GetTagRoute from './routes/miscellaneous/GetTagRoute';
+import GetTagRoute from './routes/tags/GetTagRoute';
 import { FullLicense } from './interfaces/tags';
-import GetLicenseRoute from './routes/miscellaneous/GetLicenseRoute';
+import GetLicenseRoute from './routes/tags/GetLicenseRoute';
 import {
     ProjectVersion,
     ProjectVersionFromHashOptions,
