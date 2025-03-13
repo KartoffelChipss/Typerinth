@@ -1,5 +1,5 @@
-import Dependency from "./Dependency";
-import VersionFile from "./VersionFile";
+import Dependency from './Dependency';
+import VersionFile from './VersionFile';
 
 export default interface ProjectVersion {
     name: string;
@@ -10,7 +10,13 @@ export default interface ProjectVersion {
     version_type: 'release' | 'beta' | 'alpha';
     loaders: string[];
     featured: boolean;
-    status: 'listed' | 'archived' | 'draft' | 'unlisted' | 'scheduled' | 'unknown';
+    status:
+        | 'listed'
+        | 'archived'
+        | 'draft'
+        | 'unlisted'
+        | 'scheduled'
+        | 'unknown';
     requested_status: 'listed' | 'archived' | 'draft' | 'unlisted' | null;
     id: string;
     project_id: string;

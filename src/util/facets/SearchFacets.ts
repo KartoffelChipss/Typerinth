@@ -1,4 +1,4 @@
-import FacetGroup from "./FacetGroup";
+import FacetGroup from './FacetGroup';
 
 /**
  * Represents an array of {@link FacetGroup}s for searching
@@ -69,7 +69,13 @@ export default class SearchFacets {
      * @returns The stringified search facets (e.g. [["categories:forge"], ["versions:1.16.5", "versions:1.17.1"]])
      */
     stringify(): string {
-        if (this.facetGroups.length === 0) return "";
-        return "[" + this.facetGroups.map(facetGroup => facetGroup.stringify()).join(", ") + "]";
+        if (this.facetGroups.length === 0) return '';
+        return (
+            '[' +
+            this.facetGroups
+                .map((facetGroup) => facetGroup.stringify())
+                .join(', ') +
+            ']'
+        );
     }
 }

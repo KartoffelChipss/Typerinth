@@ -1,0 +1,4 @@
+testapp/
+dist/
+.idea/
+node_modules/

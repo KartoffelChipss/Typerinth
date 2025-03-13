@@ -1,4 +1,4 @@
-import CacheOptions, {getDefaultCacheOptions} from "./CacheOptions";
+import CacheOptions, { getDefaultCacheOptions } from './CacheOptions';
 
 export default interface MROptions {
     authorization?: string;
@@ -10,9 +10,9 @@ export default interface MROptions {
 
 export function getDefaultOptions(): MROptions {
     return {
-        baseUrl: "https://api.modrinth.com",
-        apiVersion: "v2",
-        userAgent: "Modrinth.js",
-        cache: getDefaultCacheOptions()
-    }
+        baseUrl: 'https://api.modrinth.com',
+        apiVersion: 'v2',
+        userAgent: 'Modrinth.js',
+        cache: getDefaultCacheOptions(),
+    };
 }

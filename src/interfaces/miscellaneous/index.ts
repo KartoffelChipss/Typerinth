@@ -1,5 +1,3 @@
-import ModrinthStatistics from "./ModrinthStatistics";
+import ModrinthStatistics from './ModrinthStatistics';
 
-export {
-    ModrinthStatistics
-}
+export { ModrinthStatistics };

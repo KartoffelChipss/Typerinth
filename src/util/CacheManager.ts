@@ -1,5 +1,5 @@
-import NodeCache from "node-cache";
-import CacheOptions from "../interfaces/CacheOptions";
+import NodeCache from 'node-cache';
+import CacheOptions from '../interfaces/CacheOptions';
 
 export default class CacheManager {
     private cache: NodeCache;
@@ -7,7 +7,10 @@ export default class CacheManager {
 
     constructor(cacheOptions: CacheOptions) {
         this.cacheOptions = cacheOptions;
-        this.cache = new NodeCache({ stdTTL: cacheOptions.ttl, checkperiod: cacheOptions.checkperiod });
+        this.cache = new NodeCache({
+            stdTTL: cacheOptions.ttl,
+            checkperiod: cacheOptions.checkperiod,
+        });
     }
 
     /**

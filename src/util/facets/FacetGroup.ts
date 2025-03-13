@@ -1,4 +1,4 @@
-import Facet from "./Facet";
+import Facet from './Facet';
 
 /**
  * Represents a group of {@link Facet}s
@@ -54,7 +54,9 @@ export default class FacetGroup {
      * @returns The stringified facet group (e.g. ["categories:forge"] or ["versions:1.16.5", "versions:1.17.1"])
      */
     stringify(): string {
-        if (this.facets.length === 0) return "";
-        return "[" + this.facets.map(facet => facet.stringify()).join(", ") + "]";
+        if (this.facets.length === 0) return '';
+        return (
+            '[' + this.facets.map((facet) => facet.stringify()).join(', ') + ']'
+        );
     }
 }

@@ -1,4 +1,4 @@
-import SearchHit from "./SearchHit";
+import SearchHit from './SearchHit';
 
 export default interface SearchResult {
     hits: SearchHit[];

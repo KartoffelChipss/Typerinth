@@ -17,6 +17,6 @@ export function getDefaultCacheOptions(): CacheOptions {
     return {
         ttl: 600,
         checkperiod: 120,
-        useCache: true
-    }
+        useCache: true,
+    };
 }

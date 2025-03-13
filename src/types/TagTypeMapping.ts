@@ -1,5 +1,10 @@
-import {TagType} from "../enums/TagType";
-import {Category, GameVersion, Loader, DonationPlatform} from "../interfaces/tags";
+import { TagType } from '../enums/TagType';
+import {
+    Category,
+    GameVersion,
+    Loader,
+    DonationPlatform,
+} from '../interfaces/tags';
 
 export type TagTypeMapping = {
     [TagType.Category]: Category[];

@@ -1,30 +1,34 @@
-import MROptions, {getDefaultOptions} from "./interfaces/MROptions";
-import {URL} from "url";
-import {GetProjectRoute} from "./routes/projects/GetProjectRoute";
-import {Project, SearchResult} from "./interfaces/project";
-import {GetMultipleProjectsRoute} from "./routes/projects/GetMultipleProjectsRoute";
-import CacheManager from "./util/CacheManager";
-import {GetRandomProjects} from "./routes/projects/GetRandomProjects";
-import {Range, Range0to100} from "./types/Range";
-import {CheckProjectValidityRoute} from "./routes/projects/CheckProjectValidityRoute";
-import ModrinthStatistics from "./interfaces/miscellaneous/ModrinthStatistics";
-import StatisticsRoute from "./routes/miscellaneous/StatisticsRoute";
-import SearchProjectRoute from "./routes/projects/SearchProjectRoute";
-import SearchOptions from "./interfaces/project/search/SearchOptions";
-import {User} from "./interfaces/users";
-import GetUserRoute from "./routes/users/GetUserRoute";
-import GetMultipleUsersRoute from "./routes/users/GetMultipleUsersRoute";
-import GetUserProjectsRoute from "./routes/users/GetUserProjectsRoute";
-import {TagType} from "./enums/TagType";
-import {TagTypeMapping} from "./types/TagTypeMapping";
-import GetTagRoute from "./routes/miscellaneous/GetTagRoute";
-import {FullLicense} from "./interfaces/tags";
-import GetLicenseRoute from "./routes/miscellaneous/GetLicenseRoute";
-import {ProjectVersion, ProjectVersionFromHashOptions, ProjectVersionSearchOptions} from "./interfaces/version";
-import GetProjectVersionsRoute from "./routes/versions/GetProjectVersionsRoute";
-import GetVersionRoute from "./routes/versions/GetVersionRoute";
-import GetMultipleVersionsRoute from "./routes/versions/GetMultipleVersionsRoute";
-import GetVersionFromFileHashRoute from "./routes/versions/GetVersionFromFileHashRoute";
+import MROptions, { getDefaultOptions } from './interfaces/MROptions';
+import { URL } from 'url';
+import { GetProjectRoute } from './routes/projects/GetProjectRoute';
+import { Project, SearchResult } from './interfaces/project';
+import { GetMultipleProjectsRoute } from './routes/projects/GetMultipleProjectsRoute';
+import CacheManager from './util/CacheManager';
+import { GetRandomProjects } from './routes/projects/GetRandomProjects';
+import { Range, Range0to100 } from './types/Range';
+import { CheckProjectValidityRoute } from './routes/projects/CheckProjectValidityRoute';
+import ModrinthStatistics from './interfaces/miscellaneous/ModrinthStatistics';
+import StatisticsRoute from './routes/miscellaneous/StatisticsRoute';
+import SearchProjectRoute from './routes/projects/SearchProjectRoute';
+import SearchOptions from './interfaces/project/search/SearchOptions';
+import { User } from './interfaces/users';
+import GetUserRoute from './routes/users/GetUserRoute';
+import GetMultipleUsersRoute from './routes/users/GetMultipleUsersRoute';
+import GetUserProjectsRoute from './routes/users/GetUserProjectsRoute';
+import { TagType } from './enums/TagType';
+import { TagTypeMapping } from './types/TagTypeMapping';
+import GetTagRoute from './routes/miscellaneous/GetTagRoute';
+import { FullLicense } from './interfaces/tags';
+import GetLicenseRoute from './routes/miscellaneous/GetLicenseRoute';
+import {
+    ProjectVersion,
+    ProjectVersionFromHashOptions,
+    ProjectVersionSearchOptions,
+} from './interfaces/version';
+import GetProjectVersionsRoute from './routes/versions/GetProjectVersionsRoute';
+import GetVersionRoute from './routes/versions/GetVersionRoute';
+import GetMultipleVersionsRoute from './routes/versions/GetMultipleVersionsRoute';
+import GetVersionFromFileHashRoute from './routes/versions/GetVersionFromFileHashRoute';
 
 /**
  * The main class for the Modrinth API
@@ -47,12 +51,12 @@ export default class Modrinth {
     constructor(options: MROptions = {}) {
         this.options = {
             ...getDefaultOptions(),
-            ...options
-        }
+            ...options,
+        };
         this.options.cache = {
             ...getDefaultOptions().cache,
-            ...options.cache
-        }
+            ...options.cache,
+        };
         this.cacheManager = new CacheManager(this.options.cache!!);
     }
 
@@ -145,7 +149,10 @@ export default class Modrinth {
      * @param projectId The ID or slug of the project to get the versions of
      * @param options Options for the search
      */
-    getProjectVersions(projectId: string, options: ProjectVersionSearchOptions = {}): Promise<ProjectVersion[]> {
+    getProjectVersions(
+        projectId: string,
+        options: ProjectVersionSearchOptions = {}
+    ): Promise<ProjectVersion[]> {
         return new GetProjectVersionsRoute(
             this.getApiUrl(),
             this.options.userAgent,
@@ -181,7 +188,10 @@ export default class Modrinth {
         ).getData();
     }
 
-    getVersionFromFileHash(fileHash: string, options: ProjectVersionFromHashOptions = {}): Promise<ProjectVersion> {
+    getVersionFromFileHash(
+        fileHash: string,
+        options: ProjectVersionFromHashOptions = {}
+    ): Promise<ProjectVersion> {
         return new GetVersionFromFileHashRoute(
             this.getApiUrl(),
             this.options.userAgent,
@@ -264,7 +274,7 @@ export default class Modrinth {
         return new StatisticsRoute(
             this.getApiUrl(),
             this.options.userAgent,
-            this.cacheManager,
+            this.cacheManager
         ).getData();
     }
 }

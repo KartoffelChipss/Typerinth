@@ -1,7 +1,4 @@
-import PayoutData from "./PayoutData";
-import User from "./User";
+import PayoutData from './PayoutData';
+import User from './User';
 
-export {
-    PayoutData,
-    User
-}
+export { PayoutData, User };

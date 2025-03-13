@@ -1,5 +1,5 @@
-import {URL} from "url";
-import CacheManager from "../util/CacheManager";
+import { URL } from 'url';
+import CacheManager from '../util/CacheManager';
 
 export abstract class Route<T> {
     /**
@@ -12,7 +12,7 @@ export abstract class Route<T> {
      * The user agent to use for the request
      * @protected
      */
-    protected ua: string|undefined;
+    protected ua: string | undefined;
 
     /**
      * The cache options for the route
@@ -25,7 +25,11 @@ export abstract class Route<T> {
      * @param ua - The user agent to use for the request
      * @param cacheManager - The cache manager to use for the route
      */
-    constructor(baseUrl: URL, ua: string|undefined, cacheManager: CacheManager) {
+    constructor(
+        baseUrl: URL,
+        ua: string | undefined,
+        cacheManager: CacheManager
+    ) {
         this.baseUrl = baseUrl;
         this.ua = ua;
         this.cacheManager = cacheManager;
@@ -39,25 +43,22 @@ export abstract class Route<T> {
     /**
      * Get the cache key for the route
      */
-    abstract getCacheKey(): string|null;
+    abstract getCacheKey(): string | null;
 
     /**
      * Fetch the raw data from the url
      * @returns The data from the API
      */
     private fetchRaw(): Promise<any> {
-        return fetch(
-            this.getUrl().toString(),
-            {
-                method: "GET",
-                headers: {
-                    "User-Agent": this.ua ?? ""
-                }
-            }
-        )
-            .then(res => res.json())
-            .then(data => data);
-    };
+        return fetch(this.getUrl().toString(), {
+            method: 'GET',
+            headers: {
+                'User-Agent': this.ua ?? '',
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => data);
+    }
 
     /**
      * Parse the data from the API
@@ -79,7 +80,8 @@ export abstract class Route<T> {
 
         const data = this.parseData(await this.fetchRaw());
 
-        if (this.cacheManager.isEnabled() && this.getCacheKey() != null) this.cacheManager.set(this.getCacheKey()!!, data);
+        if (this.cacheManager.isEnabled() && this.getCacheKey() != null)
+            this.cacheManager.set(this.getCacheKey()!!, data);
 
         return data;
     }

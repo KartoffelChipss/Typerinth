@@ -1,5 +1,5 @@
-import {FacetType} from "../../enums/facets/FacetType";
-import {FacetOperation} from "../../enums/facets/FacetOperation";
+import { FacetType } from '../../enums/facets/FacetType';
+import { FacetOperation } from '../../enums/facets/FacetOperation';
 
 /**
  * Represents a facet

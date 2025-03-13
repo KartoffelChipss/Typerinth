@@ -1,4 +1,4 @@
-import PayoutData from "./PayoutData";
+import PayoutData from './PayoutData';
 
 export default interface User {
     username: string;

@@ -1,6 +1,6 @@
-import DonationUrl from "./DonationUrl";
-import License from "./License";
-import GalleryItem from "./GalleryItem";
+import DonationUrl from './DonationUrl';
+import License from './License';
+import GalleryItem from './GalleryItem';
 
 export default interface Project {
     slug: string;
