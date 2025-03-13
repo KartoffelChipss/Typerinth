@@ -21,7 +21,7 @@ export default class GetUserRoute extends Route<User> {
     }
 
     getUrl(): URL {
-        return Route.addPathSegment(this.baseUrl, `/users`);
+        return Route.addPathSegment(this.baseUrl, `/user/${this.userId}`);
     }
 
     parseData(data: any): User {
