@@ -1,0 +1,19 @@
+{
+    "out": "docs",
+    "name": "Typerinth",
+    "includeVersion": true,
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "hideGenerator": true,
+    "plugin": ["typedoc-github-theme"],
+    "theme": "typedoc-github-theme",
+    "readme": "typedoc-readme.md",
+    "navigationLinks": {
+        "Discord": "https://strassburger.org/discord",
+        "NPM": "https://www.npmjs.com/package/typerinth",
+        "GitHub": "https://github.com/KartoffelChipss/Typerinth"
+    },
+    "disableSources": true,
+    "entryPoints": ["src"],
+    "entryPointStrategy": "resolve"
+}

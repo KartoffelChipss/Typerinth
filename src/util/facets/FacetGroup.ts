@@ -2,7 +2,7 @@ import Facet from './Facet';
 
 /**
  * Represents a group of {@link Facet}s
- * @description
+ *
  * Facets in a group are combined with an **OR** operation
  * @example
  * // FacetGroup with the version "1.16.5" or "1.17.1"

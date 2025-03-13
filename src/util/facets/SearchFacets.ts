@@ -2,7 +2,7 @@ import FacetGroup from './FacetGroup';
 
 /**
  * Represents an array of {@link FacetGroup}s for searching
- * @description
+ *
  * You can use multiple {@link FacetGroup}s to combine them with an **AND** operation.
  * Inside a {@link FacetGroup}, you can use multiple {@link Facet}s to combine them with an **OR** operation.
  * @example
@@ -24,10 +24,12 @@ export default class SearchFacets {
 
     /**
      * Creates an array of FacetGroups for searching
-     * @param facetGroups
-     * @description
+     *
      * You can use multiple {@link FacetGroup}s to combine them with an **AND** operation.
      * Inside a {@link FacetGroup}, you can use multiple {@link Facet}s to combine them with an **OR** operation.
+     *
+     * @param facetGroups The facet groups
+     *
      * @example
      * // Search for projects with the category "forge" and the version "1.16.5" or "1.17.1"
      * const searchFacets = new SearchFacets(

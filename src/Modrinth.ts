@@ -5,7 +5,7 @@ import { Project, SearchResult } from './interfaces/project';
 import { GetMultipleProjectsRoute } from './routes/projects/GetMultipleProjectsRoute';
 import CacheManager from './util/CacheManager';
 import { GetRandomProjects } from './routes/projects/GetRandomProjects';
-import { Range, Range0to100 } from './types/Range';
+import { Range0to100 } from './types/Range';
 import { CheckProjectValidityRoute } from './routes/projects/CheckProjectValidityRoute';
 import ModrinthStatistics from './interfaces/miscellaneous/ModrinthStatistics';
 import StatisticsRoute from './routes/miscellaneous/StatisticsRoute';

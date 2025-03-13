@@ -3,7 +3,7 @@ import { FacetOperation } from '../../enums/facets/FacetOperation';
 
 /**
  * Represents a facet
- * @description
+ *
  * A facet is a filter for searching
  * It consists of a type, an operation, and a value
  * @example

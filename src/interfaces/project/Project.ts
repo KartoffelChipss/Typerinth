@@ -2,6 +2,9 @@ import DonationUrl from './DonationUrl';
 import License from './License';
 import GalleryItem from './GalleryItem';
 
+/**
+ * Represents a project on Modrinth.
+ */
 export default interface Project {
     slug: string;
     title: string;

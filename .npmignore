@@ -4,6 +4,7 @@ jstestapp/
 .idea/
 node_modules/
 .github/
+docs/
 
 src/**/*.ts
 src/**/*.tsx
@@ -13,3 +14,4 @@ src/**/*.tsx
 *.eslintrc
 *.eslintignore
 *.DS_Store
+typedoc-readme.md

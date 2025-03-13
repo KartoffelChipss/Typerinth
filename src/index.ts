@@ -4,6 +4,8 @@ import {
     License,
     DonationUrl,
     GalleryItem,
+    SearchResult,
+    SearchHit,
 } from './interfaces/project';
 import { ModrinthStatistics } from './interfaces/miscellaneous';
 import Facet from './util/facets/Facet';
@@ -27,10 +29,19 @@ import {
     ProjectVersionSearchOptions,
     ProjectVersionFromHashOptions,
 } from './interfaces/version';
+import MROptions from './interfaces/MROptions';
+import { TagTypeMapping } from './types/TagTypeMapping';
+import { User, PayoutData } from './interfaces/users';
+import CacheOptions from './interfaces/CacheOptions';
+import SearchOptions from './interfaces/project/search/SearchOptions';
 
 export {
     Modrinth,
+    MROptions,
+    CacheOptions,
     Project,
+    User,
+    PayoutData,
     License,
     DonationUrl,
     GalleryItem,
@@ -39,6 +50,9 @@ export {
     FacetGroup,
     SearchFacets,
     SearchIndex,
+    SearchResult,
+    SearchHit,
+    SearchOptions,
     FacetType,
     FacetOperation,
     TagType,
@@ -52,4 +66,5 @@ export {
     VersionFile,
     ProjectVersionSearchOptions,
     ProjectVersionFromHashOptions,
+    TagTypeMapping,
 };

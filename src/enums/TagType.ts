@@ -1,3 +1,6 @@
+/**
+ * Represents the type of a tag.
+ */
 export enum TagType {
     Category = 'category',
     Loader = 'loader',
