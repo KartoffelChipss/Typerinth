@@ -1,0 +1,15 @@
+tests/
+testapp/
+jstestapp/
+.idea/
+node_modules/
+.github/
+
+src/**/*.ts
+src/**/*.tsx
+
+*.prettierrc
+*.prettierignore
+*.eslintrc
+*.eslintignore
+*.DS_Store
