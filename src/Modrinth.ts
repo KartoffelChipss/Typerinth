@@ -29,6 +29,7 @@ import GetProjectVersionsRoute from './routes/versions/GetProjectVersionsRoute';
 import GetVersionRoute from './routes/versions/GetVersionRoute';
 import GetMultipleVersionsRoute from './routes/versions/GetMultipleVersionsRoute';
 import GetVersionFromFileHashRoute from './routes/versions/GetVersionFromFileHashRoute';
+import { ApiError, ProjectNotFoundError, UnexpectedApiError } from './errors';
 
 /**
  * The main class for the Modrinth API
@@ -95,6 +96,9 @@ export default class Modrinth {
      * Get a project by its ID or slug
      * @param projectId The ID or slug of the project to get
      * @returns The project with the given ID or slug
+     * @throws {} {@link ProjectNotFoundError} If the project with the given ID or slug does not exist
+     * @throws {} {@link ApiError} If an error occurs while getting the project
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs while getting the project
      */
     getProject(projectId: string): Promise<Project> {
         return new GetProjectRoute(

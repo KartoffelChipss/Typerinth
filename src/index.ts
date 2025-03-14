@@ -35,6 +35,7 @@ import { TagTypeMapping } from './types/TagTypeMapping';
 import { User, PayoutData } from './interfaces/users';
 import CacheOptions from './interfaces/CacheOptions';
 import SearchOptions from './interfaces/project/search/SearchOptions';
+import * as Errors from './errors';
 
 export {
     Modrinth,
@@ -69,4 +70,5 @@ export {
     ProjectVersionSearchOptions,
     ProjectVersionFromHashOptions,
     TagTypeMapping,
+    Errors,
 };
