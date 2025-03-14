@@ -35,6 +35,7 @@ import {
     UnexpectedApiError,
     UserNotFoundError,
     UserProjectsNotFoundError,
+    LicenseNotFoundError,
 } from './errors';
 
 /**
@@ -267,6 +268,8 @@ export default class Modrinth {
     /**
      * Get a tag by its type
      * @param tagType The type of the tag to get
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getTag<T extends TagType>(tagType: T): Promise<TagTypeMapping[T]> {
         return new GetTagRoute(
@@ -280,6 +283,9 @@ export default class Modrinth {
     /**
      * Get a license by its ID
      * @param licenseId The ID of the license to get
+     * @throws {} {@link LicenseNotFoundError} If the license with the given ID does not exist
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getLicense(licenseId: string): Promise<FullLicense> {
         return new GetLicenseRoute(

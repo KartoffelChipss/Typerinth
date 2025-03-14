@@ -3,6 +3,7 @@ import { URL } from 'url';
 import CacheManager from '../../util/CacheManager';
 import { TagType } from '../../enums/TagType';
 import { TagTypeMapping } from '../../types/TagTypeMapping';
+import { ApiError, UnexpectedApiError } from '../../errors';
 
 export default class GetTagRoute<T extends TagType> extends Route<
     TagTypeMapping[T]
@@ -28,15 +29,8 @@ export default class GetTagRoute<T extends TagType> extends Route<
     }
 
     parseData(data: any): TagTypeMapping[T] {
-        if (!data) throw new Error('Unexpected empty response');
-
-        if (data.error) {
-            if (data.error === 'not_found')
-                throw new Error('User projects not found');
-            throw new Error(
-                `Unexpected error: ${data.error} (${data.description})`
-            );
-        }
+        if (!data) throw new UnexpectedApiError('Unexpected empty response');
+        if (data.error) throw new ApiError(data.error, data.description);
 
         return data as TagTypeMapping[T];
     }

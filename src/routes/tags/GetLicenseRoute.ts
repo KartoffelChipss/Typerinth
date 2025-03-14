@@ -2,6 +2,11 @@ import { Route } from '../Route';
 import { FullLicense } from '../../interfaces/tags';
 import CacheManager from '../../util/CacheManager';
 import { URL } from 'url';
+import {
+    ApiError,
+    LicenseNotFoundError,
+    UnexpectedApiError,
+} from '../../errors';
 
 export default class GetLicenseRoute extends Route<FullLicense> {
     private licenseId: string;
@@ -28,14 +33,13 @@ export default class GetLicenseRoute extends Route<FullLicense> {
     }
 
     parseData(data: any): FullLicense {
-        if (!data) throw new Error('Unexpected empty response');
+        if (data === null) throw new LicenseNotFoundError('License not found');
+        if (!data) throw new UnexpectedApiError('Unexpected empty response');
 
         if (data.error) {
-            if (data.error === 'not_found')
-                throw new Error('FullLicense not found');
-            throw new Error(
-                `Unexpected error: ${data.error} (${data.description})`
-            );
+            if (data.error === 'not_found' || data.error === 'invalid_input')
+                throw new LicenseNotFoundError('License not found');
+            throw new ApiError(data.error, data.description);
         }
 
         return data as FullLicense;
