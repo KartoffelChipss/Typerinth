@@ -8,6 +8,7 @@ import SearchOptions, {
     getDefaultSearchOptions,
 } from '../../interfaces/project/search/SearchOptions';
 import SearchFacets from '../../util/facets/SearchFacets';
+import { ApiError, UnexpectedApiError } from '../../errors';
 
 export default class SearchProjectRoute extends Route<SearchResult> {
     private query: string;
@@ -53,12 +54,9 @@ export default class SearchProjectRoute extends Route<SearchResult> {
     }
 
     parseData(data: any): SearchResult {
-        if (!data) throw new Error('Unexpected empty response');
+        if (!data) throw new UnexpectedApiError('Unexpected empty response');
 
-        if (data.error)
-            throw new Error(
-                `Unexpected error: ${data.error} (${data.description})`
-            );
+        if (data.error) throw new ApiError(data.error, data.description);
 
         return data as SearchResult;
     }

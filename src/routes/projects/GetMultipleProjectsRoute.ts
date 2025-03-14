@@ -2,6 +2,7 @@ import { Route } from '../Route';
 import { Project } from '../../interfaces/project';
 import { URL } from 'node:url';
 import CacheManager from '../../util/CacheManager';
+import { ApiError, UnexpectedApiError } from '../../errors';
 
 export class GetMultipleProjectsRoute extends Route<Project[]> {
     private projectIds: string[];
@@ -30,16 +31,8 @@ export class GetMultipleProjectsRoute extends Route<Project[]> {
     }
 
     parseData(data: any): Project[] {
-        if (!data) throw new Error('Unexpected empty response');
-
-        if (data.error) {
-            if (data.error === 'not_found')
-                throw new Error('Project not found');
-            throw new Error(
-                `Unexpected error: ${data.error} (${data.description})`
-            );
-        }
-
+        if (!data) throw new UnexpectedApiError('Unexpected empty response');
+        if (data.error) throw new ApiError(data.error, data.description);
         return data as Project[];
     }
 }

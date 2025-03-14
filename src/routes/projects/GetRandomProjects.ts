@@ -3,6 +3,7 @@ import { Project } from '../../interfaces/project';
 import { URL } from 'node:url';
 import CacheManager from '../../util/CacheManager';
 import { Range0to100 } from '../../types/Range';
+import { ApiError, UnexpectedApiError } from '../../errors';
 
 export class GetRandomProjects extends Route<Project[]> {
     private count: number;
@@ -32,12 +33,8 @@ export class GetRandomProjects extends Route<Project[]> {
     }
 
     parseData(data: any): Project[] {
-        if (!data) throw new Error('Unexpected empty response');
-        if (data.error)
-            throw new Error(
-                `Unexpected error: ${data.error} (${data.description})`
-            );
-
+        if (!data) throw new UnexpectedApiError('Unexpected empty response');
+        if (data.error) throw new ApiError(data.error, data.description);
         return data as Project[];
     }
 }

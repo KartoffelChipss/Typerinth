@@ -81,6 +81,8 @@ export default class Modrinth {
      * Search for projects
      * @param query The query to search for
      * @param options Options for the search
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     search(query: string, options?: SearchOptions): Promise<SearchResult> {
         return new SearchProjectRoute(
@@ -97,8 +99,8 @@ export default class Modrinth {
      * @param projectId The ID or slug of the project to get
      * @returns The project with the given ID or slug
      * @throws {} {@link ProjectNotFoundError} If the project with the given ID or slug does not exist
-     * @throws {} {@link ApiError} If an error occurs while getting the project
-     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs while getting the project
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getProject(projectId: string): Promise<Project> {
         return new GetProjectRoute(
@@ -112,6 +114,8 @@ export default class Modrinth {
     /**
      * Get multiple projects by their IDs or slugs
      * @param projectIds The IDs or slugs of the projects to get
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getProjects(projectIds: string[]): Promise<Project[]> {
         return new GetMultipleProjectsRoute(
@@ -125,6 +129,8 @@ export default class Modrinth {
     /**
      * Get a random selection of projects
      * @param count The number of projects to get (between 0 and 100)
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getRandomProjects(count: Range0to100): Promise<Project[]> {
         return new GetRandomProjects(
