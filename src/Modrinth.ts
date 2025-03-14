@@ -299,6 +299,7 @@ export default class Modrinth {
     /**
      * Get the statistics for Modrinth
      * @returns The statistics for Modrinth
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getStatistics(): Promise<ModrinthStatistics> {
         return new StatisticsRoute(

@@ -2,6 +2,7 @@ import { URL } from 'url';
 import ModrinthStatistics from '../../interfaces/miscellaneous/ModrinthStatistics';
 import { Route } from '../Route';
 import CacheManager from '../../util/CacheManager';
+import { UnexpectedApiError } from '../../errors';
 
 export default class StatisticsRoute extends Route<ModrinthStatistics> {
     constructor(
@@ -21,7 +22,7 @@ export default class StatisticsRoute extends Route<ModrinthStatistics> {
     }
 
     parseData(data: any): ModrinthStatistics {
-        if (!data) throw new Error('Unexpected empty response');
+        if (!data) throw new UnexpectedApiError('Unexpected empty response');
 
         return data as ModrinthStatistics;
     }
