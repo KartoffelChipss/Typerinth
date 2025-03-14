@@ -56,7 +56,13 @@ export abstract class Route<T> {
                 'User-Agent': this.ua ?? '',
             },
         })
-            .then((res) => res.json())
+            .then((res) => {
+                if (res.status === 404) {
+                    return null;
+                }
+
+                return res.json();
+            })
             .then((data) => data);
     }
 

@@ -25,6 +25,8 @@ export class GetProjectRoute extends Route<Project> {
     }
 
     parseData(data: any): Project {
+        if (data === null) throw new Error('Project not found');
+
         if (!data) throw new Error('Unexpected empty response');
 
         if (data.error) {
