@@ -5,6 +5,11 @@ import {
     ProjectVersion,
     ProjectVersionSearchOptions,
 } from '../../interfaces/version';
+import {
+    ApiError,
+    UnexpectedApiError,
+    VersionNotFoundError,
+} from '../../errors';
 
 export default class GetProjectVersionsRoute extends Route<ProjectVersion[]> {
     private projectId: string;
@@ -50,14 +55,14 @@ export default class GetProjectVersionsRoute extends Route<ProjectVersion[]> {
     }
 
     parseData(data: any): ProjectVersion[] {
-        if (!data) throw new Error('Unexpected empty response');
+        if (data === null)
+            throw new VersionNotFoundError('Project version not found');
+        if (!data) throw new UnexpectedApiError('Unexpected empty response');
 
         if (data.error) {
             if (data.error === 'not_found')
-                throw new Error('Project version not found');
-            throw new Error(
-                `Unexpected error: ${data.error} (${data.description})`
-            );
+                throw new VersionNotFoundError('Project version not found');
+            throw new ApiError(data.error, data.description);
         }
 
         return data as ProjectVersion[];

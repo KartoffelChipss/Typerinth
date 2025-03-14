@@ -5,6 +5,11 @@ import {
 } from '../../interfaces/version';
 import { URL } from 'url';
 import CacheManager from '../../util/CacheManager';
+import {
+    ApiError,
+    UnexpectedApiError,
+    VersionNotFoundError,
+} from '../../errors';
 
 export default class GetVersionFromFileHashRoute extends Route<ProjectVersion> {
     private fileHash: string;
@@ -42,14 +47,13 @@ export default class GetVersionFromFileHashRoute extends Route<ProjectVersion> {
     }
 
     parseData(data: any): ProjectVersion {
-        if (!data) throw new Error('Unexpected empty response');
+        if (data === null) throw new VersionNotFoundError('Version not found');
+        if (!data) throw new UnexpectedApiError('Unexpected empty response');
 
         if (data.error) {
             if (data.error === 'not_found')
-                throw new Error('Project version not found');
-            throw new Error(
-                `Unexpected error: ${data.error} (${data.description})`
-            );
+                throw new VersionNotFoundError('Version not found');
+            throw new ApiError(data.error, data.description);
         }
 
         return data as ProjectVersion;

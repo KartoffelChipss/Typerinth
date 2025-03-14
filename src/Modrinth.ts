@@ -36,6 +36,7 @@ import {
     UserNotFoundError,
     UserProjectsNotFoundError,
     LicenseNotFoundError,
+    VersionNotFoundError,
 } from './errors';
 
 /**
@@ -165,6 +166,9 @@ export default class Modrinth {
      * Get the versions of a project
      * @param projectId The ID or slug of the project to get the versions of
      * @param options Options for the search
+     * @throws {} {@link VersionNotFoundError} If there are no versions for the project
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getProjectVersions(
         projectId: string,
@@ -182,6 +186,9 @@ export default class Modrinth {
     /**
      * Get a version of a project
      * @param versionId The ID of the version to get
+     * @throws {} {@link VersionNotFoundError} If the version with the given ID does not exist
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getVersion(versionId: string): Promise<ProjectVersion> {
         return new GetVersionRoute(
@@ -195,6 +202,8 @@ export default class Modrinth {
     /**
      * Get multiple versions by their IDs
      * @param versionIds The IDs of the versions to get
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getVersions(versionIds: string[]): Promise<ProjectVersion[]> {
         return new GetMultipleVersionsRoute(
@@ -205,6 +214,15 @@ export default class Modrinth {
         ).getData();
     }
 
+    /**
+     * Get a version from a file hash
+     * @param fileHash The hash of the file to get the version of
+     * @param options Options for the search
+     * @returns The version with the given file hash
+     * @throws {} {@link VersionNotFoundError} If the version with the given file hash does not exist
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     */
     getVersionFromFileHash(
         fileHash: string,
         options: ProjectVersionFromHashOptions = {}

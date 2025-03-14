@@ -4,6 +4,7 @@ import { ProjectNotFoundError } from './projects/ProjectNotFoundError';
 import { UserNotFoundError } from './users/UserNotFoundError';
 import { UserProjectsNotFoundError } from './users/UserProjectsNotFoundError';
 import { LicenseNotFoundError } from './tags/LicenseNotFoundError';
+import { VersionNotFoundError } from './versions/VersionNotFoundError';
 
 export {
     UnexpectedApiError,
@@ -12,4 +13,5 @@ export {
     UserNotFoundError,
     UserProjectsNotFoundError,
     LicenseNotFoundError,
+    VersionNotFoundError,
 };
