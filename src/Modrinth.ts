@@ -29,7 +29,13 @@ import GetProjectVersionsRoute from './routes/versions/GetProjectVersionsRoute';
 import GetVersionRoute from './routes/versions/GetVersionRoute';
 import GetMultipleVersionsRoute from './routes/versions/GetMultipleVersionsRoute';
 import GetVersionFromFileHashRoute from './routes/versions/GetVersionFromFileHashRoute';
-import { ApiError, ProjectNotFoundError, UnexpectedApiError } from './errors';
+import {
+    ApiError,
+    ProjectNotFoundError,
+    UnexpectedApiError,
+    UserNotFoundError,
+    UserProjectsNotFoundError,
+} from './errors';
 
 /**
  * The main class for the Modrinth API
@@ -214,6 +220,9 @@ export default class Modrinth {
     /**
      * Get a user by their ID or username
      * @param userId The ID or username of the user to get
+     * @throws {} {@link UserNotFoundError} If the user with the given ID or username does not exist
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getUser(userId: string): Promise<User> {
         return new GetUserRoute(
@@ -227,6 +236,8 @@ export default class Modrinth {
     /**
      * Get multiple users by their IDs or usernames
      * @param userIds The IDs or usernames of the users to get
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getUsers(userIds: string[]): Promise<User[]> {
         return new GetMultipleUsersRoute(
@@ -240,6 +251,9 @@ export default class Modrinth {
     /**
      * Get a user's projects by their ID or username
      * @param userId The ID or username of the user
+     * @throws {} {@link UserProjectsNotFoundError} If the user's projects do not exist
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      */
     getUserProjects(userId: string): Promise<Project[]> {
         return new GetUserProjectsRoute(

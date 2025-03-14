@@ -2,6 +2,8 @@ import { URL } from 'url';
 import { Route } from '../Route';
 import { User } from '../../interfaces/users';
 import CacheManager from '../../util/CacheManager';
+import { ApiError, UnexpectedApiError, UserNotFoundError } from '../../errors';
+import { error } from 'console';
 
 export default class GetUserRoute extends Route<User> {
     private userId: string;
@@ -25,13 +27,13 @@ export default class GetUserRoute extends Route<User> {
     }
 
     parseData(data: any): User {
-        if (!data) throw new Error('Unexpected empty response');
+        if (data === null) throw new UserNotFoundError('User not found');
+        if (!data) throw new UnexpectedApiError('Unexpected empty response');
 
         if (data.error) {
-            if (data.error === 'not_found') throw new Error('User not found');
-            throw new Error(
-                `Unexpected error: ${data.error} (${data.description})`
-            );
+            if (data.error === 'not_found')
+                throw new UserNotFoundError('User not found');
+            throw new ApiError(data.error, data.description);
         }
 
         return data as User;
