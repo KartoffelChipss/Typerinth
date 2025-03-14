@@ -21,6 +21,7 @@ import {
     Loader,
     GameVersion,
     FullLicense,
+    ShortLicense,
 } from './interfaces/tags';
 import {
     ProjectVersion,
@@ -61,6 +62,7 @@ export {
     Loader,
     GameVersion,
     FullLicense,
+    ShortLicense,
     ProjectVersion,
     Dependency,
     VersionFile,
