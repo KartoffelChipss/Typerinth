@@ -38,6 +38,7 @@ import {
     LicenseNotFoundError,
     VersionNotFoundError,
 } from './errors';
+import GetAuthUserRoute from './routes/users/GetAuthUserRoute';
 
 /**
  * The main class for the Modrinth API
@@ -280,6 +281,24 @@ export default class Modrinth {
             this.options.userAgent,
             this.cacheManager,
             userId
+        ).getData();
+    }
+
+    /**
+     * Get the user that is authenticated with the authorization header
+     *
+     * **Rquires authorization** with scopes:
+     * > `USER_READ`
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @returns The authenticated user
+     */
+    getAuthUser(): Promise<User> {
+        return new GetAuthUserRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            this.options.authorization
         ).getData();
     }
 

@@ -15,6 +15,12 @@ export abstract class Route<T> {
     protected ua: string | undefined;
 
     /**
+     * The authorization token to use for the request
+     * @protected
+     */
+    protected authorization: string | undefined;
+
+    /**
      * The cache options for the route
      */
     protected cacheManager: CacheManager;
@@ -24,15 +30,18 @@ export abstract class Route<T> {
      * @param baseUrl - The base URL for the API
      * @param ua - The user agent to use for the request
      * @param cacheManager - The cache manager to use for the route
+     * @param authorization - The authorization token to use for the request
      */
     constructor(
         baseUrl: URL,
         ua: string | undefined,
-        cacheManager: CacheManager
+        cacheManager: CacheManager,
+        authorization?: string | undefined
     ) {
         this.baseUrl = baseUrl;
         this.ua = ua;
         this.cacheManager = cacheManager;
+        this.authorization = authorization;
     }
 
     /**
@@ -54,6 +63,7 @@ export abstract class Route<T> {
             method: 'GET',
             headers: {
                 'User-Agent': this.ua ?? '',
+                Authorization: this.authorization ?? '',
             },
         })
             .then((res) => {
