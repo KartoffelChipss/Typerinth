@@ -47,7 +47,7 @@ import { AuthScope } from './enums/AuthScope';
  * The main class for the Modrinth API
  *
  * @example
- * import {Modrinth} from "modrinth-ts";
+ * import { Modrinth } from "modrinth-ts";
  *
  * const modrinth = new Modrinth();
  *
@@ -60,6 +60,17 @@ export default class Modrinth {
     /**
      * Create a new Modrinth instance
      * @param options Options for the Modrinth instance
+     * @example
+     * const modrinth = new Modrinth({
+     *     baseUrl: 'https://api.modrinth.com',
+     *     apiVersion: 'v2',
+     *     userAgent: 'AppName/Version',
+     *     cache: {
+     *         ttl: 600,
+     *         checkperiod: 120,
+     *         useCache: true,
+     *     },
+     * });
      */
     constructor(options: MROptions = {}) {
         this.options = {
@@ -95,6 +106,22 @@ export default class Modrinth {
      * @param options Options for the search
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @returns The search results
+     * @category Projects
+     * @example
+     * const result = await modrinth.search('life', {
+     *     limit: 3,
+     *     index: SearchIndex.Downloads,
+     *     facets: new SearchFacets(
+     *         new FacetGroup(
+     *             new Facet(FacetType.Categories, FacetOperation.EQUALS, 'forge')
+     *         ),
+     *         new FacetGroup(
+     *             new Facet(FacetType.Versions, FacetOperation.EQUALS, '1.16.5'),
+     *             new Facet(FacetType.Versions, FacetOperation.EQUALS, '1.17.1')
+     *         )
+     *     ),
+     * });
      */
     search(query: string, options?: SearchOptions): Promise<SearchResult> {
         return new SearchProjectRoute(
@@ -113,6 +140,7 @@ export default class Modrinth {
      * @throws {} {@link ProjectNotFoundError} If the project with the given ID or slug does not exist
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Projects
      */
     getProject(projectId: string): Promise<Project> {
         return new GetProjectRoute(
@@ -128,6 +156,7 @@ export default class Modrinth {
      * @param projectIds The IDs or slugs of the projects to get
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Projects
      */
     getProjects(projectIds: string[]): Promise<Project[]> {
         return new GetMultipleProjectsRoute(
@@ -143,6 +172,7 @@ export default class Modrinth {
      * @param count The number of projects to get (between 0 and 100)
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Projects
      */
     getRandomProjects(count: Range0to100): Promise<Project[]> {
         return new GetRandomProjects(
@@ -156,6 +186,8 @@ export default class Modrinth {
     /**
      * Check if a project is valid
      * @param projectId The ID or slug of the project to check
+     * @returns Whether the project is valid
+     * @category Projects
      */
     checkProjectValidity(projectId: string): Promise<boolean> {
         return new CheckProjectValidityRoute(
@@ -173,6 +205,7 @@ export default class Modrinth {
      * @throws {} {@link VersionNotFoundError} If there are no versions for the project
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Versions
      */
     getProjectVersions(
         projectId: string,
@@ -193,6 +226,7 @@ export default class Modrinth {
      * @throws {} {@link VersionNotFoundError} If the version with the given ID does not exist
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Versions
      */
     getVersion(versionId: string): Promise<ProjectVersion> {
         return new GetVersionRoute(
@@ -208,6 +242,7 @@ export default class Modrinth {
      * @param versionIds The IDs of the versions to get
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Versions
      */
     getVersions(versionIds: string[]): Promise<ProjectVersion[]> {
         return new GetMultipleVersionsRoute(
@@ -226,6 +261,7 @@ export default class Modrinth {
      * @throws {} {@link VersionNotFoundError} If the version with the given file hash does not exist
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Versions
      */
     getVersionFromFileHash(
         fileHash: string,
@@ -246,6 +282,7 @@ export default class Modrinth {
      * @throws {} {@link UserNotFoundError} If the user with the given ID or username does not exist
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Users
      */
     getUser(userId: string): Promise<User> {
         return new GetUserRoute(
@@ -261,6 +298,7 @@ export default class Modrinth {
      * @param userIds The IDs or usernames of the users to get
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Users
      */
     getUsers(userIds: string[]): Promise<User[]> {
         return new GetMultipleUsersRoute(
@@ -277,6 +315,7 @@ export default class Modrinth {
      * @throws {} {@link UserProjectsNotFoundError} If the user's projects do not exist
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Users
      */
     getUserProjects(userId: string): Promise<Project[]> {
         return new GetUserProjectsRoute(
@@ -295,6 +334,7 @@ export default class Modrinth {
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      * @returns The authenticated user
+     * @category Users
      */
     getAuthUser(): Promise<User> {
         return new GetAuthUserRoute(
@@ -310,6 +350,7 @@ export default class Modrinth {
      * @param tagType The type of the tag to get
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Tags
      */
     getTag<T extends TagType>(tagType: T): Promise<TagTypeMapping[T]> {
         return new GetTagRoute(
@@ -326,6 +367,7 @@ export default class Modrinth {
      * @throws {} {@link LicenseNotFoundError} If the license with the given ID does not exist
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Tags
      */
     getLicense(licenseId: string): Promise<FullLicense> {
         return new GetLicenseRoute(
@@ -340,6 +382,7 @@ export default class Modrinth {
      * Get the statistics for Modrinth
      * @returns The statistics for Modrinth
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @category Miscellaneous
      */
     getStatistics(): Promise<ModrinthStatistics> {
         return new StatisticsRoute(
@@ -359,6 +402,7 @@ export default class Modrinth {
      * @param clientId The ID of the client
      * @param redirectUri The uri to redirect to after getting the token (must be listed in the client's redirect URIs)
      * @returns The access token and other token information
+     * @category Auth
      */
     getToken(
         code: string,
@@ -384,6 +428,14 @@ export default class Modrinth {
      * @param redirectUri The uri to redirect to with the authorization code (must be listed in the client's redirect URIs)
      * @param scopes The scopes to request authorization for (must be listed in the client's scopes)
      * @returns The URL to get the authorization code
+     * @category Auth
+     *
+     * @example
+     * new Modrinth().generateAuthorizationUrl(
+     *     CLIENT_ID,
+     *     "https://example.com/auth/callback",
+     *     [AuthScope.UserRead, AuthScope.PayoutsRead]
+     * );
      */
     generateAuthorizationUrl(
         clientId: string,

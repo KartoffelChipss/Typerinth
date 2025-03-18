@@ -13,7 +13,8 @@
         "format": "prettier --write 'src/**/*.{ts,tsx}'",
         "testapp": "tsc && bun ./testapp/index.ts",
         "testapp2": "tsc && node ./jstestapp/index.js",
-        "docs": "typedoc --options typedoc.json"
+        "docs": "typedoc --options typedoc.json",
+        "opendocs": "bun run docs && open ./docs/index.html"
     },
     "repository": {
         "type": "git",
