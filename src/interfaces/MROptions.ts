@@ -2,7 +2,7 @@ import CacheOptions, { getDefaultCacheOptions } from './CacheOptions';
 
 export default interface MROptions {
     /**
-     * Either a [Personal Access Token](https://modrinth.com/settings/pats) or a token using the [OAuth2 Authorization Code Flow](https://docs.modrinth.com/api/#authentication)
+     * Either a [Personal Access Token](https://modrinth.com/settings/pats) or the Client secret when using the [OAuth2 Authorization Flow](https://docs.modrinth.com/api/#authentication)
      * @default undefined
      */
     authorization?: string;

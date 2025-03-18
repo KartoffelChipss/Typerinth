@@ -39,6 +39,9 @@ import {
     VersionNotFoundError,
 } from './errors';
 import GetAuthUserRoute from './routes/users/GetAuthUserRoute';
+import { GetTokenResponse } from './interfaces/auth';
+import GetTokenRoute from './routes/auth/GetTokenRoute';
+import { AuthScope } from './enums/AuthScope';
 
 /**
  * The main class for the Modrinth API
@@ -344,5 +347,53 @@ export default class Modrinth {
             this.options.userAgent,
             this.cacheManager
         ).getData();
+    }
+
+    /**
+     * Get an access token from an authorization code
+     *
+     * (Rquest to `https://api.modrinth.com/_internal/oauth/token`)
+     *
+     * [Modrinth OAuth Guide](https://github.com/modrinth/code/pull/3342/files)
+     * @param code The authorization code gotten from the authorization URL
+     * @param clientId The ID of the client
+     * @param redirectUri The uri to redirect to after getting the token (must be listed in the client's redirect URIs)
+     * @returns The access token and other token information
+     */
+    getToken(
+        code: string,
+        clientId: string,
+        redirectUri: string
+    ): Promise<GetTokenResponse> {
+        return new GetTokenRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            this.options.authorization,
+            code,
+            clientId,
+            redirectUri
+        ).getData();
+    }
+
+    /**
+     * Generate an authorization URL to get an authorization code
+     *
+     * [Modrinth OAuth Guide](https://github.com/modrinth/code/pull/3342/files)
+     * @param clientId The ID of the client
+     * @param redirectUri The uri to redirect to with the authorization code (must be listed in the client's redirect URIs)
+     * @param scopes The scopes to request authorization for (must be listed in the client's scopes)
+     * @returns The URL to get the authorization code
+     */
+    generateAuthorizationUrl(
+        clientId: string,
+        redirectUri: string,
+        scopes: AuthScope[]
+    ): string {
+        const url = new URL('https://modrinth.com/auth/authorize');
+        url.searchParams.append('client_id', clientId);
+        url.searchParams.append('redirect_uri', redirectUri);
+        url.searchParams.append('scope', scopes.join('+'));
+        return url.toString();
     }
 }

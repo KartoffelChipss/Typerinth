@@ -1,5 +1,17 @@
 import { URL } from 'url';
 import CacheManager from '../util/CacheManager';
+import { RequestBody } from '../util/requestbody/RequestBody';
+
+export type FetchMethod =
+    | 'GET'
+    | 'POST'
+    | 'PUT'
+    | 'DELETE'
+    | 'PATCH'
+    | 'HEAD'
+    | 'OPTIONS'
+    | 'CONNECT'
+    | 'TRACE';
 
 export abstract class Route<T> {
     /**
@@ -55,16 +67,36 @@ export abstract class Route<T> {
     abstract getCacheKey(): string | null;
 
     /**
+     * Get the fetch method for the request
+     * @returns The fetch method to use for the request
+     * @protected
+     */
+    protected getFetchMethod(): FetchMethod {
+        return 'GET';
+    }
+
+    /**
+     * Get the body for the fetch request
+     * @returns The body for the fetch request
+     * @protected
+     */
+    protected getFetchBody(): RequestBody | null {
+        return null;
+    }
+
+    /**
      * Fetch the raw data from the url
      * @returns The data from the API
      */
-    private fetchRaw(): Promise<any> {
+    private async fetchRaw(): Promise<any> {
         return fetch(this.getUrl().toString(), {
-            method: 'GET',
+            method: this.getFetchMethod(),
             headers: {
                 'User-Agent': this.ua ?? '',
                 Authorization: this.authorization ?? '',
+                'Content-Type': this.getFetchBody()?.getContentType() ?? '',
             },
+            body: this.getFetchBody()?.getFormattedBody() ?? undefined,
         })
             .then((res) => {
                 if (res.status === 404) {

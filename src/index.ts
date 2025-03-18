@@ -35,6 +35,7 @@ import { TagTypeMapping } from './types/TagTypeMapping';
 import { User, PayoutData } from './interfaces/users';
 import CacheOptions from './interfaces/CacheOptions';
 import SearchOptions from './interfaces/project/search/SearchOptions';
+import { GetTokenResponse } from './interfaces/auth';
 import * as Errors from './errors';
 
 export {
@@ -71,4 +72,5 @@ export {
     ProjectVersionFromHashOptions,
     TagTypeMapping,
     Errors,
+    GetTokenResponse,
 };
