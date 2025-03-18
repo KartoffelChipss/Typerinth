@@ -4,6 +4,8 @@
 
 This library is a wrapper around the [Modrinth API](https://docs.modrinth.com/), a platform for Minecraft mods, modpacks, and other content. It is not an official package by Modrinth and not affiliated with Modrinth in any way.
 
+[![npm](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/available/npm_vector.svg)](https://www.npmjs.com/package/typerinth) [![ghpages](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/documentation/ghpages_vector.svg)](https://typerinth.js.org/)
+
 ## Table of Contents
 
 - [Installation](#installation)
