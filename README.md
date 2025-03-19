@@ -26,9 +26,14 @@ This library is a wrapper around the [Modrinth API](https://docs.modrinth.com/),
         - [Get a user by their ID or username](#get-a-user-by-their-id-or-username)
         - [Get multiple users by their IDs or usernames](#get-multiple-users-by-their-ids-or-usernames)
         - [Get a user's projects](#get-a-users-projects)
-    - [Miscellanous](#miscellanous)
-        - [Get tags by its type](#get-tags-by-its-type)
+        - [Get the authenticated user](#get-the-authenticated-user)
+    - [Tags](#tags)
+        - [Get tags by its type](#get-tags)
         - [Get a License by its ID](#get-a-license-by-its-id)
+    - [Auth](#auth)
+        - [Generate an authorization URL to get an authorization code](#generate-an-authorization-URL-to-get-an-authorization-code)
+        - [Get an access token from an authorization code](#get-an-access-token-from-an-authorization-code)
+    - [Miscellanous](#miscellanous)
         - [Get statistics](#get-statistics)
 - [License](#license)
 
@@ -56,8 +61,6 @@ You can change the options to tune typerinth to your liking:
 ```ts
 import { Modrinth } from 'typerinth';
 const modrinth = new Modrinth({
-    baseUrl: 'https://api.modrinth.com',
-    apiVersion: 'v2',
     userAgent: 'AppName/Version',
     cache: {
         ttl: 600,
@@ -114,11 +117,15 @@ const result = await modrinth.search('life', {
 });
 ```
 
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#search)
+
 #### Get a project by its ID or slug
 
 ```ts
 const project = await modrinth.getProject('project-id');
 ```
+
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getproject)
 
 #### Get multiple projects by their IDs or slugs
 
@@ -126,17 +133,23 @@ const project = await modrinth.getProject('project-id');
 const projects = await modrinth.getProjects(['project-id-1', 'project-id-2']);
 ```
 
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getprojects)
+
 #### Get a random selection of projects
 
 ```ts
 const projects = await modrinth.getRandomProjects(5);
 ```
 
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getrandomprojects)
+
 #### Check if a project ID or slug is valid
 
 ```ts
 const isValid = await modrinth.checkProjectValidity('project-id');
 ```
+
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#checkprojectvalidity)
 
 ---
 
@@ -151,11 +164,15 @@ const versions = await modrinth.getProjectVersions('project-id', {
 });
 ```
 
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getprojectversions)
+
 #### Get a version by its ID
 
 ```ts
 const version = await modrinth.getVersion('version-id');
 ```
+
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getversion)
 
 #### Get multiple versions by their IDs
 
@@ -163,11 +180,15 @@ const version = await modrinth.getVersion('version-id');
 const versions = await modrinth.getVersions(['version-id-1', 'version-id-2']);
 ```
 
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getversions)
+
 #### Get the version from a file hash
 
 ```ts
 const version = await modrinth.getVersionFromFileHash('file-hash');
 ```
+
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getversionfromfilehash)
 
 ---
 
@@ -179,11 +200,15 @@ const version = await modrinth.getVersionFromFileHash('file-hash');
 const user = await modrinth.getUser('user-id');
 ```
 
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getuser)
+
 #### Get multiple users by their IDs or usernames
 
 ```ts
 const users = await modrinth.getUsers(['user-id-1', 'user-id-2']);
 ```
+
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getusers)
 
 #### Get a user's projects
 
@@ -191,9 +216,21 @@ const users = await modrinth.getUsers(['user-id-1', 'user-id-2']);
 const projects = await modrinth.getUserProjects('user-id');
 ```
 
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getuserprojects)
+
+#### Get the authenticated user
+
+This method returns the user that is authenticated by the authorization header
+
+```ts
+const projects = await modrinth.getAuthUser();
+```
+
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getauthuser)
+
 ---
 
-### Miscellanous
+### Tags
 
 #### Get tags
 
@@ -204,17 +241,55 @@ import { TagType } from 'typerinth';
 const tags = await modrinth.getTag(TagType.Loader);
 ```
 
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#gettag)
+
 #### Get a License by its ID
 
 ```ts
 const license = await modrinth.getLicense('license-id');
 ```
 
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getlicense)
+
+---
+
+### Auth
+
+#### Generate an authorization URL to get an authorization code
+
+```ts
+const url = modrinth.generateAuthorizationUrl(
+    CLIENT_ID,
+    'http://localhost:3000/callback',
+    [AuthScope.UserRead, AuthScope.PayoutsRead]
+);
+```
+
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#generateauthorizationurl)
+
+#### Get an access token from an authorization code
+
+```ts
+const token = await modrinth.getToken(
+    'YNJZ3OPwkgC7B4svVFv6PTDWdLNajGZx,
+    CLIENT_ID,
+    'http://localhost:3000/callback'
+);
+```
+
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#gettoken)
+
+---
+
+### Miscellanous
+
 #### Get statistics
 
 ```ts
 const stats = await modrinth.getStatistics();
 ```
+
+[> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getstatistics)
 
 ## License
 
