@@ -3,7 +3,6 @@ import { Route } from '../Route';
 import { User } from '../../interfaces/users';
 import CacheManager from '../../util/CacheManager';
 import { ApiError, UnexpectedApiError, UserNotFoundError } from '../../errors';
-import { error } from 'console';
 
 export default class GetUserRoute extends Route<User> {
     private userId: string;

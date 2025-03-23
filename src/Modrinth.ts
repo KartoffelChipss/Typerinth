@@ -42,6 +42,8 @@ import GetAuthUserRoute from './routes/users/GetAuthUserRoute';
 import { GetTokenResponse } from './interfaces/auth';
 import GetTokenRoute from './routes/auth/GetTokenRoute';
 import { AuthScope } from './enums/AuthScope';
+import { TeamMember } from './interfaces/teams';
+import GetTeamMemberRoute from './routes/teams/GetProjectTeamMembers';
 
 /**
  * The main class for the Modrinth API
@@ -342,6 +344,26 @@ export default class Modrinth {
             this.options.userAgent,
             this.cacheManager,
             this.options.authorization
+        ).getData();
+    }
+
+    /**
+     * Get the team members of a project
+     *
+     * @param projectId The ID or slug of the project to get the team members of
+     * @throws {} {@link ProjectNotFoundError} If the project with the given ID or slug does not exist
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @returns The team members of the project with the given ID or slug
+     * @category Teams
+     */
+    getProjectTeamMembers(projectId: string): Promise<TeamMember[]> {
+        return new GetTeamMemberRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            this.options.authorization,
+            projectId
         ).getData();
     }
 
