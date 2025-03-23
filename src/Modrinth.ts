@@ -43,7 +43,9 @@ import { GetTokenResponse } from './interfaces/auth';
 import GetTokenRoute from './routes/auth/GetTokenRoute';
 import { AuthScope } from './enums/AuthScope';
 import { TeamMember } from './interfaces/teams';
-import GetTeamMemberRoute from './routes/teams/GetProjectTeamMembers';
+import GetProjectTeamMembersRoute from './routes/teams/GetProjectTeamMembers';
+import GetTeamMembersRoute from './routes/teams/GetTeamMembers';
+import GetMultipleTeamsMembers from './routes/teams/GetMultipleTeamsMembers';
 
 /**
  * The main class for the Modrinth API
@@ -358,12 +360,50 @@ export default class Modrinth {
      * @category Teams
      */
     getProjectTeamMembers(projectId: string): Promise<TeamMember[]> {
-        return new GetTeamMemberRoute(
+        return new GetProjectTeamMembersRoute(
             this.getApiUrl(),
             this.options.userAgent,
             this.cacheManager,
             this.options.authorization,
             projectId
+        ).getData();
+    }
+
+    /**
+     * Get the team members of a team
+     *
+     * @param teamId The ID of the team to get the members of
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @returns The team members of the team with the given ID
+     * @category Teams
+     */
+    getTeamMembers(teamId: string): Promise<TeamMember[]> {
+        return new GetTeamMembersRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            this.options.authorization,
+            teamId
+        ).getData();
+    }
+
+    /**
+     * Get the members of multiple teams
+     *
+     * @param teamIds The IDs of the teams to get the members of
+     * @throws {} {@link ApiError} If an error occurs
+     * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
+     * @returns The members of the teams with the given IDs
+     * @category Teams
+     */
+    getMultipleTeamMembers(teamIds: string[]): Promise<TeamMember[][]> {
+        return new GetMultipleTeamsMembers(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            this.options.authorization,
+            teamIds
         ).getData();
     }
 

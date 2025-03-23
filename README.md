@@ -27,6 +27,10 @@ This library is a wrapper around the [Modrinth API](https://docs.modrinth.com/),
         - [Get multiple users by their IDs or usernames](#get-multiple-users-by-their-ids-or-usernames)
         - [Get a user's projects](#get-a-users-projects)
         - [Get the authenticated user](#get-the-authenticated-user)
+    - [Teams](#teams)
+        - [Get a project's team members](#get-a-projects-team-members)
+        - [Get a team's members](#get-a-teams-members)
+        - [Get the members of mutliple teams](#get-the-members-of-mutliple-teams)
     - [Tags](#tags)
         - [Get tags by its type](#get-tags)
         - [Get a License by its ID](#get-a-license-by-its-id)
@@ -227,6 +231,31 @@ const projects = await modrinth.getAuthUser();
 ```
 
 [> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getauthuser)
+
+---
+
+### Teams
+
+#### Get a project's team members
+
+```ts
+const members = await modrinth.getProjectTeamMembers('project-id');
+```
+
+#### Get a team's members
+
+```ts
+const members = await modrinth.getTeamMembers('team-id');
+```
+
+#### Get the members of mutliple teams
+
+```ts
+const members = await modrinth.getMultipleTeamMembers([
+    'team-1-id',
+    'team-2-id',
+]);
+```
 
 ---
 

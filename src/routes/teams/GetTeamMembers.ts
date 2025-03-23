@@ -1,43 +1,36 @@
 import { URL } from 'url';
 import { Route } from '../Route';
 import CacheManager from '../../util/CacheManager';
-import {
-    ApiError,
-    ProjectNotFoundError,
-    UnexpectedApiError,
-} from '../../errors';
+import { ApiError, UnexpectedApiError } from '../../errors';
 import { TeamMember } from '../../interfaces/teams';
 import { bitfieldToArray } from '../../enums/TeamMemberPermissions';
 
-export default class GetProjectTeamMembersRoute extends Route<TeamMember[]> {
+export default class GetTeamMembersRoute extends Route<TeamMember[]> {
     constructor(
         baseUrl: URL,
         ua: string | undefined,
         cacheManager: CacheManager,
         authorization: string | undefined,
-        private projectId: string
+        private teamId: string
     ) {
         super(baseUrl, ua, cacheManager, authorization);
     }
 
     getCacheKey(): string | null {
-        return `teams:project_members:${this.projectId}`;
+        return `teams:${this.teamId}:members`;
     }
 
     getUrl(): URL {
         return Route.addPathSegment(
             this.baseUrl,
-            `/project/${this.projectId}/members`
+            `/team/${this.teamId}/members`
         );
     }
 
     parseData(data: any): TeamMember[] {
-        if (data === null) throw new ProjectNotFoundError('User not found');
         if (!data) throw new UnexpectedApiError('Unexpected empty response');
 
         if (data.error) {
-            if (data.error === 'not_found')
-                throw new ProjectNotFoundError('User not found');
             throw new ApiError(data.error, data.description);
         }
 
