@@ -51,7 +51,7 @@ import GetMultipleTeamsMembers from './routes/teams/GetMultipleTeamsMembers';
  * The main class for the Modrinth API
  *
  * @example
- * import { Modrinth } from "modrinth-ts";
+ * import { Modrinth } from "typerinth";
  *
  * const modrinth = new Modrinth();
  *
