@@ -88,7 +88,7 @@ export abstract class Route<T> {
      * Fetch the raw data from the url
      * @returns The data from the API
      */
-    private async fetchRaw(): Promise<any> {
+    private async fetchRaw(): Promise<Response> {
         return fetch(this.getUrl().toString(), {
             method: this.getFetchMethod(),
             headers: {
@@ -97,22 +97,15 @@ export abstract class Route<T> {
                 'Content-Type': this.getFetchBody()?.getContentType() ?? '',
             },
             body: this.getFetchBody()?.getFormattedBody() ?? undefined,
-        })
-            .then((res) => {
-                if (res.status === 404) {
-                    return null;
-                }
-
-                return res.json();
-            })
-            .then((data) => data);
+        });
     }
 
     /**
      * Parse the data from the API
      * @param data The data from the API
+     * @param statusCode The status code of the response
      */
-    abstract parseData(data: any): T;
+    abstract parseData(data: any, statusCode: number): T;
 
     /**
      * Get the data from the API
@@ -126,12 +119,21 @@ export abstract class Route<T> {
             }
         }
 
-        const data = this.parseData(await this.fetchRaw());
+        const res = await this.fetchRaw();
+
+        let rawData: any | null = null;
+        try {
+            rawData = await res.json();
+        } catch (error) {
+            rawData = null;
+        }
+
+        const parsedData = this.parseData(rawData, res.status);
 
         if (this.cacheManager.isEnabled() && this.getCacheKey() != null)
-            this.cacheManager.set(this.getCacheKey()!!, data);
+            this.cacheManager.set(this.getCacheKey()!!, parsedData);
 
-        return data;
+        return parsedData;
     }
 
     public static addPathSegment(url: URL, pathSegment: string): URL {
