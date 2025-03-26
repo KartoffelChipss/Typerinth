@@ -2,6 +2,7 @@
 
 testapp/
 docs/
+genCoverageRow.py
 
 # Logs
 

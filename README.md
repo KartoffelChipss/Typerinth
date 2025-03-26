@@ -39,6 +39,7 @@ This library is a wrapper around the [Modrinth API](https://docs.modrinth.com/),
         - [Get an access token from an authorization code](#get-an-access-token-from-an-authorization-code)
     - [Miscellanous](#miscellanous)
         - [Get statistics](#get-statistics)
+- [Coverage](#coverage)
 - [License](#license)
 
 ## Installation
@@ -319,6 +320,10 @@ const stats = await modrinth.getStatistics();
 ```
 
 [> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getstatistics)
+
+## Coverage
+
+You can find a list of the endpoints covered by this library in the [coverage.md](https://github.com/KartoffelChipss/Typerinth/blob/main/coverage.md) file.
 
 ## License
 
