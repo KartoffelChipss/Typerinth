@@ -99,10 +99,10 @@ A 🔒 next to the name means that the endpoint needs authentication.
 
 | Name                                                                                                                                                                            | Implemented |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| Get a project's team members [[M]](https://docs.modrinth.com/api/operations/getprojectteammembers/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getprojectteammembers) | ☑️          |
-| Get a team's members [[M]](https://docs.modrinth.com/api/operations/getteammembers/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getteammembers)                       | ☑️          |
+| Get a project's team members [[M]](https://docs.modrinth.com/api/operations/getprojectteammembers/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getprojectteammembers) | ✅          |
+| Get a team's members [[M]](https://docs.modrinth.com/api/operations/getteammembers/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getteammembers)                       | ✅          |
 | Add a user to a team 🔒 [[M]](https://docs.modrinth.com/api/operations/addteammember/)                                                                                          | ❌          |
-| Get the members of multiple teams [[M]](https://docs.modrinth.com/api/operations/getteams/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getmultipleteammembers)        | ☑️          |
+| Get the members of multiple teams [[M]](https://docs.modrinth.com/api/operations/getteams/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getmultipleteammembers)        | ✅          |
 | Join a team 🔒 [[M]](https://docs.modrinth.com/api/operations/jointeam/)                                                                                                        | ❌          |
 | Remove a member from a team 🔒 [[M]](https://docs.modrinth.com/api/operations/deleteteammember/)                                                                                | ❌          |
 | Modify a team member's information 🔒 [[M]](https://docs.modrinth.com/api/operations/modifyteammember/)                                                                         | ❌          |

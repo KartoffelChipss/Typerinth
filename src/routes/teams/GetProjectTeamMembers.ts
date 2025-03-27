@@ -32,12 +32,12 @@ export default class GetProjectTeamMembersRoute extends Route<TeamMember[]> {
     }
 
     parseData(data: any): TeamMember[] {
-        if (data === null) throw new ProjectNotFoundError('User not found');
+        if (data === null) throw new ProjectNotFoundError('Project not found');
         if (!data) throw new UnexpectedApiError('Unexpected empty response');
 
         if (data.error) {
             if (data.error === 'not_found')
-                throw new ProjectNotFoundError('User not found');
+                throw new ProjectNotFoundError('Project not found');
             throw new ApiError(data.error, data.description);
         }
 
