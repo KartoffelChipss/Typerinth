@@ -57,17 +57,17 @@ A 🔒 next to the name means that the endpoint needs authentication.
 
 ## Users
 
-| Name                                                                                                                                                                     | Implemented |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
-| Get a user [[M]](https://docs.modrinth.com/api/operations/getuser/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getuser)                                        | ✅          |
-| Modify a user 🔒 [[M]](https://docs.modrinth.com/api/operations/modifyuser/)                                                                                             | ❌          |
-| Get user from authorization header 🔒 [[M]](https://docs.modrinth.com/api/operations/getuserfromauth/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getauthuser) | ☑️          |
-| Get multiple users [[M]](https://docs.modrinth.com/api/operations/getusers/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getusers)                              | ✅          |
-| Change user's avatar 🔒 [[M]](https://docs.modrinth.com/api/operations/changeusericon/)                                                                                  | ❌          |
-| Get user's projects [[M]](https://docs.modrinth.com/api/operations/getuserprojects/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getuserprojects)               | ✅          |
-| Get user's followed projects 🔒 [[M]](https://docs.modrinth.com/api/operations/getfollowedprojects/)                                                                     | ❌          |
-| Get user's payout history 🔒 [[M]](https://docs.modrinth.com/api/operations/getpayouthistory/)                                                                           | ❌          |
-| Withdraw payout balance to PayPal or Venmo 🔒 [[M]](https://docs.modrinth.com/api/operations/withdrawpayout/)                                                            | ❌          |
+| Name                                                                                                                                                                           | Implemented |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
+| Get a user [[M]](https://docs.modrinth.com/api/operations/getuser/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getuser)                                              | ✅          |
+| Modify a user 🔒 [[M]](https://docs.modrinth.com/api/operations/modifyuser/)                                                                                                   | ❌          |
+| Get user from authorization header 🔒 [[M]](https://docs.modrinth.com/api/operations/getuserfromauth/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getauthuser)       | ☑️          |
+| Get multiple users [[M]](https://docs.modrinth.com/api/operations/getusers/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getusers)                                    | ✅          |
+| Change user's avatar 🔒 [[M]](https://docs.modrinth.com/api/operations/changeusericon/)                                                                                        | ❌          |
+| Get user's projects [[M]](https://docs.modrinth.com/api/operations/getuserprojects/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getuserprojects)                     | ✅          |
+| Get user's followed projects 🔒 [[M]](https://docs.modrinth.com/api/operations/getfollowedprojects/) [[T]](https://typerinth.js.org/classes/Modrinth.html#getfollowedprojects) | ☑️          |
+| Get user's payout history 🔒 [[M]](https://docs.modrinth.com/api/operations/getpayouthistory/)                                                                                 | ❌          |
+| Withdraw payout balance to PayPal or Venmo 🔒 [[M]](https://docs.modrinth.com/api/operations/withdrawpayout/)                                                                  | ❌          |
 
 ## Notifications
 

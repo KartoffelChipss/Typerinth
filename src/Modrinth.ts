@@ -46,6 +46,7 @@ import { TeamMember } from './interfaces/teams';
 import GetProjectTeamMembersRoute from './routes/teams/GetProjectTeamMembers';
 import GetTeamMembersRoute from './routes/teams/GetTeamMembers';
 import GetMultipleTeamsMembers from './routes/teams/GetMultipleTeamsMembers';
+import GetFollowedProjectsRoute from './routes/users/GetFollowedProjectsRoute';
 
 /**
  * The main class for the Modrinth API
@@ -331,9 +332,29 @@ export default class Modrinth {
     }
 
     /**
+     * Get the projects followed by a user
+     *
+     * **Rquires authorization** with scope:
+     * > `USER_READ`
+     * @param userId The ID or username of the user to get the followed projects of
+     * @throws {} {@link UserNotFoundError} If the user with the given ID or username does not exist
+     * @throws {} {@link ApiError} If an error occurs
+     * @category Users
+     */
+    getFollowedProjects(userId: string): Promise<Project[]> {
+        return new GetFollowedProjectsRoute(
+            this.getApiUrl(),
+            this.options.userAgent,
+            this.cacheManager,
+            this.options.authorization,
+            userId
+        ).getData();
+    }
+
+    /**
      * Get the user that is authenticated with the authorization header
      *
-     * **Rquires authorization** with scopes:
+     * **Rquires authorization** with scope:
      * > `USER_READ`
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs

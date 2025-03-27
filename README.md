@@ -77,6 +77,8 @@ const modrinth = new Modrinth({
 
 Once you have done this, you can use all the following functions as you like.
 
+Please note that these are only some functions. You can find a full list of all functions [here](https://typerinth.js.org/classes/Modrinth.html).
+
 ---
 
 ### Projects
