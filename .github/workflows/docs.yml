@@ -1,57 +1,55 @@
 name: Publish Docs
 
 on:
-    push:
-        branches:
-            - main
+  release:
+    types: [published]
 
 jobs:
-    build:
-        name: Build
-        runs-on: ubuntu-latest
+  build:
+    name: Build
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-            - name: Set up Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: '20'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-            - uses: oven-sh/setup-bun@v1
-              with:
-                  bun-version: latest
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
 
-            - name: Install dependencies
-              run: bun install
+      - name: Install dependencies
+        run: bun install
 
-            - name: Generate docs
-              run: bun run docs
+      - name: Generate docs
+        run: bun run docs
 
-            - name: Upload docs
-              uses: actions/upload-artifact@v4
-              with:
-                  name: docs
-                  path: ./docs
+      - name: Upload docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: ./docs
 
-    deploy:
-        name: Deploy
-        needs: build
-        runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/main'
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Download docs
-              uses: actions/download-artifact@v4
-              with:
-                  name: docs
-                  path: ./docs
+    steps:
+      - name: Download docs
+        uses: actions/download-artifact@v4
+        with:
+          name: docs
+          path: ./docs
 
-            - name: Deploy to GitHub Pages
-              uses: peaceiris/actions-gh-pages@v3
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  publish_dir: ./docs
-                  publish_branch: gh-pages
-                  cname: typerinth.js.org
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
+          cname: typerinth.js.org
