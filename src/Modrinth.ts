@@ -485,23 +485,25 @@ export default class Modrinth {
      *
      * (Rquest to `https://api.modrinth.com/_internal/oauth/token`)
      *
-     * [Modrinth OAuth Guide](https://github.com/modrinth/code/pull/3342/files)
+     * [Modrinth OAuth Guide](https://docs.modrinth.com/guide/oauth/)
      * @param code The authorization code gotten from the authorization URL
      * @param clientId The ID of the client
      * @param redirectUri The uri to redirect to after getting the token (must be listed in the client's redirect URIs)
+     * @param authorization The authorization header to use (if not set, the one from the options will be used)
      * @returns The access token and other token information
      * @category Auth
      */
     getToken(
         code: string,
         clientId: string,
-        redirectUri: string
+        redirectUri: string,
+        authorization?: string
     ): Promise<GetTokenResponse> {
         return new GetTokenRoute(
             this.getApiUrl(),
             this.options.userAgent,
             this.cacheManager,
-            this.options.authorization,
+            authorization || this.options.authorization,
             code,
             clientId,
             redirectUri
@@ -511,10 +513,11 @@ export default class Modrinth {
     /**
      * Generate an authorization URL to get an authorization code
      *
-     * [Modrinth OAuth Guide](https://github.com/modrinth/code/pull/3342/files)
+     * [Modrinth OAuth Guide](https://docs.modrinth.com/guide/oauth/)
      * @param clientId The ID of the client
      * @param redirectUri The uri to redirect to with the authorization code (must be listed in the client's redirect URIs)
      * @param scopes The scopes to request authorization for (must be listed in the client's scopes)
+     * @param state An optional state parameter to include in the URL (useful for CSRF protection)
      * @returns The URL to get the authorization code
      * @category Auth
      *
@@ -528,12 +531,14 @@ export default class Modrinth {
     generateAuthorizationUrl(
         clientId: string,
         redirectUri: string,
-        scopes: AuthScope[]
+        scopes: AuthScope[],
+        state?: string
     ): string {
         const url = new URL('https://modrinth.com/auth/authorize');
         url.searchParams.append('client_id', clientId);
         url.searchParams.append('redirect_uri', redirectUri);
         url.searchParams.append('scope', scopes.join('+'));
+        if (state) url.searchParams.append('state', state);
         return url.toString();
     }
 }
