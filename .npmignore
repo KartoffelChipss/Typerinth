@@ -1,6 +1,7 @@
 tests/
 testapp/
 jstestapp/
+examples/
 .idea/
 node_modules/
 .github/

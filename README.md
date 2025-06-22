@@ -39,6 +39,7 @@ This library is a wrapper around the [Modrinth API](https://docs.modrinth.com/),
         - [Get an access token from an authorization code](#get-an-access-token-from-an-authorization-code)
     - [Miscellanous](#miscellanous)
         - [Get statistics](#get-statistics)
+- [Examples](#examples)
 - [Coverage](#coverage)
 - [License](#license)
 
@@ -322,6 +323,10 @@ const stats = await modrinth.getStatistics();
 ```
 
 [> Typedoc](https://typerinth.js.org/classes/Modrinth.html#getstatistics)
+
+## Examples
+
+- [OAuth flow example](https://github.com/KartoffelChipss/Typerinth/tree/main/examples/oauth) - A simple example on how to implement a secure OAuth 2.0 login flow using Typerinth
 
 ## Coverage
 
