@@ -337,16 +337,20 @@ export default class Modrinth {
      * **Rquires authorization** with scope:
      * > `USER_READ`
      * @param userId The ID or username of the user to get the followed projects of
+     * @param authorization The authorization header to use (if not set, the one from the options will be used)
      * @throws {} {@link UserNotFoundError} If the user with the given ID or username does not exist
      * @throws {} {@link ApiError} If an error occurs
      * @category Users
      */
-    getFollowedProjects(userId: string): Promise<Project[]> {
+    getFollowedProjects(
+        userId: string,
+        authorization?: string
+    ): Promise<Project[]> {
         return new GetFollowedProjectsRoute(
             this.getApiUrl(),
             this.options.userAgent,
             this.cacheManager,
-            this.options.authorization,
+            authorization || this.options.authorization,
             userId
         ).getData();
     }
@@ -356,17 +360,18 @@ export default class Modrinth {
      *
      * **Rquires authorization** with scope:
      * > `USER_READ`
+     * @param authorization The authorization header to use (if not set, the one from the options will be used)
      * @throws {} {@link ApiError} If an error occurs
      * @throws {} {@link UnexpectedApiError} If an unexpected error occurs
      * @returns The authenticated user
      * @category Users
      */
-    getAuthUser(): Promise<User> {
+    getAuthUser(authorization?: string): Promise<User> {
         return new GetAuthUserRoute(
             this.getApiUrl(),
             this.options.userAgent,
             this.cacheManager,
-            this.options.authorization
+            authorization || this.options.authorization
         ).getData();
     }
 
