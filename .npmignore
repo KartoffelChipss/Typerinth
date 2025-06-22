@@ -6,6 +6,7 @@ examples/
 node_modules/
 .github/
 docs/
+genCoverageRow.py
 
 src/**/*.ts
 src/**/*.tsx
