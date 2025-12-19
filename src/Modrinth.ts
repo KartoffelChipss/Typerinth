@@ -489,7 +489,7 @@ export default class Modrinth {
      * @param code The authorization code gotten from the authorization URL
      * @param clientId The ID of the client
      * @param redirectUri The uri to redirect to after getting the token (must be listed in the client's redirect URIs)
-     * @param authorization The authorization header to use (if not set, the one from the options will be used)
+     * @param clientSecret The secret of the client
      * @returns The access token and other token information
      * @category Auth
      */
@@ -497,13 +497,13 @@ export default class Modrinth {
         code: string,
         clientId: string,
         redirectUri: string,
-        authorization?: string
+        clientSecret: string
     ): Promise<GetTokenResponse> {
         return new GetTokenRoute(
             this.getApiUrl(),
             this.options.userAgent,
             this.cacheManager,
-            authorization || this.options.authorization,
+            clientSecret,
             code,
             clientId,
             redirectUri
