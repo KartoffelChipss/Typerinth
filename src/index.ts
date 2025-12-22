@@ -11,7 +11,7 @@ import { ModrinthStatistics } from './interfaces/miscellaneous';
 import Facet from './util/facets/Facet';
 import FacetGroup from './util/facets/FacetGroup';
 import SearchFacets from './util/facets/SearchFacets';
-import { SearchIndex } from './enums/SearchIndex';
+import { SearchSort } from './enums/SearchSort';
 import { FacetType } from './enums/facets/FacetType';
 import { FacetOperation } from './enums/facets/FacetOperation';
 import { TagType } from './enums/TagType';
@@ -38,6 +38,7 @@ import CacheOptions from './interfaces/CacheOptions';
 import SearchOptions from './interfaces/project/search/SearchOptions';
 import { GetTokenResponse } from './interfaces/auth';
 import { TeamMember } from './interfaces/teams';
+import { SearchFilters } from './interfaces/project/search/SearchFilters';
 import * as Errors from './errors';
 
 export {
@@ -54,10 +55,11 @@ export {
     Facet,
     FacetGroup,
     SearchFacets,
-    SearchIndex,
+    SearchSort,
     SearchResult,
     SearchHit,
     SearchOptions,
+    SearchFilters,
     FacetType,
     FacetOperation,
     TagType,

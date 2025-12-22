@@ -1,3 +1,7 @@
+import { FacetOperation } from '../../enums/facets/FacetOperation';
+import { FacetType } from '../../enums/facets/FacetType';
+import { SearchFilters } from '../../interfaces/project/search/SearchFilters';
+import Facet from './Facet';
 import FacetGroup from './FacetGroup';
 
 /**
@@ -79,5 +83,137 @@ export default class SearchFacets {
                 .join(', ') +
             ']'
         );
+    }
+
+    /**
+     * Creates SearchFacets from SearchFilters
+     * @param filters The search filters
+     * @returns The search facets
+     */
+    public static fromFilters(filters: SearchFilters): SearchFacets {
+        const searchFacets = new SearchFacets();
+
+        if (filters.projectType) {
+            const facets: Facet[] = Array.isArray(filters.projectType)
+                ? filters.projectType.map(
+                      (type) =>
+                          new Facet(
+                              FacetType.ProjectType,
+                              FacetOperation.Equals,
+                              type
+                          )
+                  )
+                : [
+                      new Facet(
+                          FacetType.ProjectType,
+                          FacetOperation.Equals,
+                          filters.projectType
+                      ),
+                  ];
+            const facetGroup = new FacetGroup();
+            facets.forEach((facet) => facetGroup.addFacet(facet));
+            searchFacets.addFacetGroup(facetGroup);
+        }
+
+        if (filters.categories) {
+            const facets: Facet[] = Array.isArray(filters.categories)
+                ? filters.categories.map(
+                      (cat) =>
+                          new Facet(
+                              FacetType.Categories,
+                              FacetOperation.Equals,
+                              cat
+                          )
+                  )
+                : [
+                      new Facet(
+                          FacetType.Categories,
+                          FacetOperation.Equals,
+                          filters.categories
+                      ),
+                  ];
+            const facetGroup = new FacetGroup();
+            facets.forEach((facet) => facetGroup.addFacet(facet));
+            searchFacets.addFacetGroup(facetGroup);
+        }
+
+        if (filters.versions) {
+            const facets: Facet[] = Array.isArray(filters.versions)
+                ? filters.versions.map(
+                      (ver) =>
+                          new Facet(
+                              FacetType.Versions,
+                              FacetOperation.Equals,
+                              ver
+                          )
+                  )
+                : [
+                      new Facet(
+                          FacetType.Versions,
+                          FacetOperation.Equals,
+                          filters.versions
+                      ),
+                  ];
+            const facetGroup = new FacetGroup();
+            facets.forEach((facet) => facetGroup.addFacet(facet));
+            searchFacets.addFacetGroup(facetGroup);
+        }
+
+        if (filters.clientSide) {
+            const facets: Facet[] = Array.isArray(filters.clientSide)
+                ? filters.clientSide.map(
+                      (side) =>
+                          new Facet(
+                              FacetType.ClientSide,
+                              FacetOperation.Equals,
+                              side
+                          )
+                  )
+                : [
+                      new Facet(
+                          FacetType.ClientSide,
+                          FacetOperation.Equals,
+                          filters.clientSide
+                      ),
+                  ];
+            const facetGroup = new FacetGroup();
+            facets.forEach((facet) => facetGroup.addFacet(facet));
+            searchFacets.addFacetGroup(facetGroup);
+        }
+
+        if (filters.serverSide) {
+            const facets: Facet[] = Array.isArray(filters.serverSide)
+                ? filters.serverSide.map(
+                      (side) =>
+                          new Facet(
+                              FacetType.ServerSide,
+                              FacetOperation.Equals,
+                              side
+                          )
+                  )
+                : [
+                      new Facet(
+                          FacetType.ServerSide,
+                          FacetOperation.Equals,
+                          filters.serverSide
+                      ),
+                  ];
+            const facetGroup = new FacetGroup();
+            facets.forEach((facet) => facetGroup.addFacet(facet));
+            searchFacets.addFacetGroup(facetGroup);
+        }
+
+        if (filters.openSource !== undefined) {
+            const facet = new Facet(
+                FacetType.OpenSource,
+                FacetOperation.Equals,
+                filters.openSource.toString()
+            );
+            const facetGroup = new FacetGroup();
+            facetGroup.addFacet(facet);
+            searchFacets.addFacetGroup(facetGroup);
+        }
+
+        return searchFacets;
     }
 }

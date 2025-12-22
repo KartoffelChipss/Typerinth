@@ -5,6 +5,7 @@ import {
     FacetOperation,
     SearchFacets,
 } from '../../src';
+import { SearchFilters } from '../../src/interfaces/project/search/SearchFilters';
 
 describe('Facets', () => {
     it('should stringify a facet', () => {
@@ -93,5 +94,114 @@ describe('Facets', () => {
 
         const searchFacets2 = new SearchFacets();
         expect(searchFacets2.stringify()).toBe('');
+    });
+});
+
+describe('SearchFacets.fromFilters', () => {
+    it('returns empty SearchFacets for empty filters object', () => {
+        const filters: SearchFilters = {};
+
+        const facets = SearchFacets.fromFilters(filters);
+
+        expect(facets.getFacetGroups().length).toBe(0);
+        expect(facets.stringify()).toBe('');
+    });
+
+    it('creates facets from single-value filters', () => {
+        const filters: SearchFilters = {
+            categories: 'utility',
+            versions: '1.20',
+        };
+
+        const facets = SearchFacets.fromFilters(filters);
+
+        expect(facets.stringify()).toBe(
+            '[["categories:utility"], ["versions:1.20"]]'
+        );
+    });
+
+    it('creates facets from array-based filters', () => {
+        const filters: SearchFilters = {
+            categories: ['utility', 'worldgen'],
+            versions: ['1.20', '1.21'],
+        };
+
+        const facets = SearchFacets.fromFilters(filters);
+
+        expect(facets.stringify()).toBe(
+            '[' +
+                '["categories:utility", "categories:worldgen"], ' +
+                '["versions:1.20", "versions:1.21"]' +
+                ']'
+        );
+    });
+
+    it('creates facets for projectType filters', () => {
+        const filters: SearchFilters = {
+            projectType: ['mod', 'plugin'],
+        };
+
+        const facets = SearchFacets.fromFilters(filters);
+
+        expect(facets.stringify()).toBe(
+            '[["project_type:mod", "project_type:plugin"]]'
+        );
+    });
+
+    it('creates facets for clientSide and serverSide filters', () => {
+        const filters: SearchFilters = {
+            clientSide: 'required',
+            serverSide: 'optional',
+        };
+
+        const facets = SearchFacets.fromFilters(filters);
+
+        expect(facets.stringify()).toBe(
+            '[["client_side:required"], ["server_side:optional"]]'
+        );
+    });
+
+    it('creates facet for openSource = true', () => {
+        const filters: SearchFilters = {
+            openSource: true,
+        };
+
+        const facets = SearchFacets.fromFilters(filters);
+
+        expect(facets.stringify()).toBe('[["open_source:true"]]');
+    });
+
+    it('creates facet for openSource = false', () => {
+        const filters: SearchFilters = {
+            openSource: false,
+        };
+
+        const facets = SearchFacets.fromFilters(filters);
+
+        expect(facets.stringify()).toBe('[["open_source:false"]]');
+    });
+
+    it('creates facets for a full filter combination', () => {
+        const filters: SearchFilters = {
+            projectType: 'mod',
+            categories: ['utility'],
+            versions: ['1.20'],
+            clientSide: 'required',
+            serverSide: 'optional',
+            openSource: true,
+        };
+
+        const facets = SearchFacets.fromFilters(filters);
+
+        expect(facets.stringify()).toBe(
+            '[' +
+                '["project_type:mod"], ' +
+                '["categories:utility"], ' +
+                '["versions:1.20"], ' +
+                '["client_side:required"], ' +
+                '["server_side:optional"], ' +
+                '["open_source:true"]' +
+                ']'
+        );
     });
 });

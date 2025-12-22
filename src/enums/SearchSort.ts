@@ -1,5 +1,5 @@
 /**
- * The search index defines how the search results are sorted.
+ * The search sort defines how the search results are sorted.
  *
  * @property Relevance - Sort by relevance. (Default)
  * @property Downloads - Sort by downloads.
@@ -7,7 +7,7 @@
  * @property Newest - Sort by creation date.
  * @property Updated - Sort by last updated.
  */
-export enum SearchIndex {
+export enum SearchSort {
     Relevance = 'relevance',
     Downloads = 'downloads',
     Follows = 'follows',
