@@ -26,14 +26,8 @@ You can change the options to tune typerinth to your liking:
 ```ts
 import { Modrinth } from 'typerinth';
 const modrinth = new Modrinth({
-    baseUrl: 'https://api.modrinth.com',
-    apiVersion: 'v2',
     userAgent: 'AppName/Version',
-    cache: {
-        ttl: 600,
-        checkperiod: 120,
-        useCache: true,
-    },
+    cache: new NodeCache({ stdTTL: 300 }),
 });
 ```
 
