@@ -9,15 +9,9 @@ export default interface MROptions {
 
     /**
      * The base URL of the Modrinth API
-     * @default 'https://api.modrinth.com'
+     * @default 'https://api.modrinth.com/v2'
      */
     baseUrl?: string;
-
-    /**
-     * The API version to use
-     * @default 'v2'
-     */
-    apiVersion?: string;
 
     /**
      * The user agent to use (**Recommended to change this** to avoid rate limiting)
@@ -38,8 +32,7 @@ export default interface MROptions {
 
 export function getDefaultOptions(): MROptions {
     return {
-        baseUrl: 'https://api.modrinth.com',
-        apiVersion: 'v2',
+        baseUrl: 'https://api.modrinth.com/v2',
         userAgent: 'typerinth (default user agent)',
         cache: getDefaultCacheOptions(),
     };

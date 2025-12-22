@@ -102,7 +102,7 @@ export default class Modrinth {
      * @returns The base URL for the Modrinth API
      */
     getApiUrl(): URL {
-        return new URL(`${this.options.baseUrl}/${this.options.apiVersion}`);
+        return new URL(`${this.options.baseUrl}`);
     }
 
     /**
