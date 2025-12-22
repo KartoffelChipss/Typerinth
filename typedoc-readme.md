@@ -31,6 +31,14 @@ const modrinth = new Modrinth({
 });
 ```
 
+## Examples
+
+- [OAuth flow example](https://github.com/KartoffelChipss/Typerinth/tree/main/examples/oauth) - A simple example on how to implement a secure OAuth 2.0 login flow using Typerinth
+
+## Coverage
+
+You can find a list of the endpoints covered by this library in the [coverage.md](https://github.com/KartoffelChipss/Typerinth/blob/main/coverage.md) file.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/KartoffelChipss/Typerinth/blob/main/LICENSE) file for details.
