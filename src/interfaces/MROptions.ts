@@ -25,7 +25,7 @@ export default interface MROptions {
     userAgent?: string;
 
     /**
-     * Cache options
+     * The cache instance to use for caching requests
      */
     cache?: NodeCache | null;
 }
