@@ -15,6 +15,7 @@ import { SearchIndex } from './enums/SearchIndex';
 import { FacetType } from './enums/facets/FacetType';
 import { FacetOperation } from './enums/facets/FacetOperation';
 import { TagType } from './enums/TagType';
+import { AuthScope } from './enums/AuthScope';
 import {
     Category,
     DonationPlatform,
@@ -75,4 +76,5 @@ export {
     Errors,
     GetTokenResponse,
     TeamMember,
+    AuthScope,
 };
