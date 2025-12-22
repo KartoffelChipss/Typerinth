@@ -68,17 +68,13 @@ You can change the options to tune typerinth to your liking:
 import { Modrinth } from 'typerinth';
 const modrinth = new Modrinth({
     userAgent: 'AppName/Version',
-    cache: {
-        ttl: 600,
-        checkperiod: 120,
-        useCache: true,
-    },
+    cache: new NodeCache({ stdTTL: 300 }),
 });
 ```
 
-Once you have done this, you can use all the following functions as you like.
+Once you have done this, you can use all the following methods as you like.
 
-Please note that these are only some functions. You can find a full list of all functions [here](https://typerinth.js.org/classes/Modrinth.html).
+Please note that these are only some methods. You can find a full list of all methods [here](https://typerinth.js.org/classes/Modrinth.html).
 
 ---
 
@@ -86,15 +82,39 @@ Please note that these are only some functions. You can find a full list of all 
 
 #### Search
 
+##### Simple Search
+
+You can perform a basic search using the `search` method, with options like `limit` and `sort`:
+
 ```ts
-import { SearchIndex } from 'typerinth';
+import { SearchSort } from 'typerinth';
 const result = await modrinth.search('life', {
     limit: 3,
-    index: SearchIndex.Downloads,
+    sort: SearchSort.Downloads,
 });
 ```
 
-You can use Facets to filter search results more precisely.
+If you want to filter the results further, you can use the `filters` option for simple filtering, or `facets` for more advanced filtering. Note that if you use `facets`, they will override the `filters`.
+
+##### Search with Filters
+
+Filters allow for straightforward filtering by things like project type or compatible versions:
+
+```ts
+import { SearchSort } from 'typerinth';
+const result = await modrinth.search('life', {
+    limit: 3,
+    sort: SearchSort.Downloads,
+    filters: {
+        projectType: 'plugin',
+        versions: ['1.20', '1.21'],
+    },
+});
+```
+
+##### Search with Facets
+
+Facet-based searching is closer to the official Modrinth API and more flexible, though slightly more complex.
 
 1. **Facet**: Represents a single filter condition. It consists of:
     - **FacetType**: The category of the filter (e.g., versions, categories, etc.).
@@ -109,10 +129,10 @@ Here’s an example where we search for projects related to "life", filtering th
 - Are compatible with Minecraft version "1.16.5" **OR** "1.20.1".
 
 ```ts
-import { SearchIndex, SearchFacets, FacetGroup, Facet } from 'typerinth';
+import { SearchSort, SearchFacets, FacetGroup, Facet } from 'typerinth';
 const result = await modrinth.search('life', {
     limit: 3,
-    index: SearchIndex.Downloads,
+    sort: SearchSort.Downloads,
     facets: new SearchFacets(
         new FacetGroup(
             new Facet(FacetType.Categories, FacetOperation.EQUALS, 'forge')

@@ -110,6 +110,18 @@ export default class Modrinth {
      * @returns The search results
      * @category Projects
      * @example
+     * // Example using simple filters:
+     * import { SearchSort } from 'typerinth';
+     * const result = await modrinth.search('life', {
+     *      limit: 3,
+     *      sort: SearchSort.Downloads,
+     *         filters: {
+     *             projectType: 'plugin',
+     *             versions: ['1.20', '1.21'],
+     *         },
+     *  });
+     * @example
+     * // Example using SearchFacets:
      * const result = await modrinth.search('life', {
      *     limit: 3,
      *     index: SearchIndex.Downloads,
