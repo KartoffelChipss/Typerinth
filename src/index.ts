@@ -34,7 +34,6 @@ import {
 import MROptions from './interfaces/MROptions';
 import { TagTypeMapping } from './types/TagTypeMapping';
 import { User, PayoutData } from './interfaces/users';
-import CacheOptions from './interfaces/CacheOptions';
 import SearchOptions from './interfaces/project/search/SearchOptions';
 import { GetTokenResponse } from './interfaces/auth';
 import { TeamMember } from './interfaces/teams';
@@ -44,7 +43,6 @@ import * as Errors from './errors';
 export {
     Modrinth,
     MROptions,
-    CacheOptions,
     Project,
     User,
     PayoutData,

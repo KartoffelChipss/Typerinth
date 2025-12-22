@@ -1,16 +1,11 @@
 import NodeCache from 'node-cache';
-import CacheOptions from '../interfaces/CacheOptions';
 
 export default class CacheManager {
-    private cache: NodeCache;
-    private cacheOptions: CacheOptions;
+    private cache: NodeCache | null;
 
-    constructor(cacheOptions: CacheOptions) {
-        this.cacheOptions = cacheOptions;
-        this.cache = new NodeCache({
-            stdTTL: cacheOptions.ttl,
-            checkperiod: cacheOptions.checkperiod,
-        });
+    constructor(cache?: NodeCache | null) {
+        if (cache) this.cache = cache;
+        else this.cache = null;
     }
 
     /**
@@ -18,7 +13,7 @@ export default class CacheManager {
      * @returns {boolean} Whether the cache is enabled
      */
     isEnabled(): boolean {
-        return this.cacheOptions.useCache ?? true;
+        return this.cache !== null;
     }
 
     /**
@@ -26,6 +21,7 @@ export default class CacheManager {
      * @param key - The key to get
      */
     get(key: string): any {
+        if (!this.cache) return null;
         return this.cache.get(key);
     }
 
@@ -35,6 +31,7 @@ export default class CacheManager {
      * @param value - The value to set
      */
     set(key: string, value: any): void {
+        if (!this.cache) return;
         this.cache.set(key, value);
     }
 
@@ -43,6 +40,7 @@ export default class CacheManager {
      * @param key - The key to delete
      */
     delete(key: string): void {
+        if (!this.cache) return;
         this.cache.del(key);
     }
 }

@@ -82,11 +82,7 @@ export default class Modrinth {
             ...getDefaultOptions(),
             ...options,
         };
-        this.options.cache = {
-            ...getDefaultOptions().cache,
-            ...options.cache,
-        };
-        this.cacheManager = new CacheManager(this.options.cache!!);
+        this.cacheManager = new CacheManager(this.options.cache);
     }
 
     /**

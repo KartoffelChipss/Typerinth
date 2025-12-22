@@ -1,4 +1,4 @@
-import CacheOptions, { getDefaultCacheOptions } from './CacheOptions';
+import NodeCache from 'node-cache';
 
 export default interface MROptions {
     /**
@@ -27,13 +27,13 @@ export default interface MROptions {
     /**
      * Cache options
      */
-    cache?: CacheOptions;
+    cache?: NodeCache | null;
 }
 
 export function getDefaultOptions(): MROptions {
     return {
         baseUrl: 'https://api.modrinth.com/v2',
         userAgent: 'typerinth (default user agent)',
-        cache: getDefaultCacheOptions(),
+        cache: new NodeCache({ stdTTL: 60 }),
     };
 }

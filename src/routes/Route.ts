@@ -114,9 +114,7 @@ export abstract class Route<T> {
     async getData(): Promise<T> {
         if (this.cacheManager.isEnabled() && this.getCacheKey() != null) {
             const cachedData = this.cacheManager.get(this.getCacheKey()!!);
-            if (cachedData) {
-                return cachedData;
-            }
+            if (cachedData) return cachedData;
         }
 
         const res = await this.fetchRaw();
